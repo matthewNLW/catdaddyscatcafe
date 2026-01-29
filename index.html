@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Daddy's Cat Cafe | Columbia, SC</title>
+    <meta name="description" content="A sanctuary for specialty coffee lovers and rescue residents in Columbia, SC.">
+
+    <!-- Fonts: Playfair Display (Headings) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/reveal.css">
+
+    <style>
+        /* Hero Overrides for Redesign */
+        .hero-media {
+            height: 90vh; /* Taller hero */
+            margin-bottom: 0;
+            position: relative;
+            /* Full-hero dark overlay for text readability */
+            background-image: 
+                linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.6) 100%),
+                url('assets/images/hero_main.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: var(--space-xl);
+            left: var(--space-md);
+            right: var(--space-md);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-text-floating {
+            max-width: 600px;
+        }
+        
+        .hero-text-floating h1 {
+            color: #fff;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1;
+            margin-bottom: var(--space-md);
+        }
+
+        .hero-text-floating p {
+            font-size: 1.2rem;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            opacity: 0.6;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
+        }
+
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; }
+            .nav-links { display: none; } /* Use a menu icon in a real implementation, for now simple stack */
+            .hero-media { height: 80vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1) NAV (Glassmorphism) -->
+    <header id="mainHeader">
+        <div class="wrap navbar">
+            <a href="index.html" class="nav-brand">
+                <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café Logo" class="logo-img">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item active">Home</a>
+                <a href="about.html" class="nav-item">About</a>
+                <a href="menu.html" class="nav-item">Menu</a>
+                <a href="events.html" class="nav-item">Events</a>
+                <a href="cat-room.html" class="nav-item">Cat Room</a>
+                <a href="#book" class="btn btn-primary btn-small">Book a Visit</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 2) HERO -->
+    <div class="hero-media">
+        <div class="hero-overlay">
+            <div class="hero-text-floating">
+                <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Columbia, SC</span>
+                <h1>A sanctuary for coffee & cats.</h1>
+                <p>Experience the perfect blend of specialty coffee and the soothing presence of our rescue residents.</p>
+                <div class="action-row">
+                    <a href="#book" class="btn btn-primary">Book Your Visit</a>
+                    <a href="cat-room.html" class="btn btn-small" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); color: #fff; border: 1px solid rgba(255,255,255,0.3);">Meet the Residents</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">Scroll</div>
+    </div>
+
+    <!-- 3) THE EXPERIENCE (Z-Pattern Features) -->
+    <section>
+        <div class="wrap">
+            <!-- Feature 1: Coffee -->
+            <div class="feature-grid reveal reveal--up">
+                <div class="feature-text">
+                    <span class="eyebrow">The Cafe</span>
+                    <h2>Artisan brews, brewed with heart.</h2>
+                    <p class="text-muted">We take our coffee as seriously as our kittens. Sourced from local roasters, our baristas craft every cup to perfection while you relax in our minimal, sun-lit lounge.</p>
+                    <a href="menu.html" class="text-link">Explore the Menu</a>
+                </div>
+                <div>
+                    <img src="assets/images/coffee-studio.png" alt="Specialty Coffee" class="feature-img aspect-landscape" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Feature 2: Cats (Reversed) -->
+            <div class="feature-grid reveal reveal--up" style="margin-top: var(--space-xxl);">
+                <div style="order: 2;">
+                    <div class="feature-text" style="padding-left: 0;">
+                        <span class="eyebrow">The Lounge</span>
+                        <h2>More than just a visit.</h2>
+                        <p class="text-muted">Spend your 50-minute session in a low-stress environment designed specifically for feline comfort. Whether you're here to work, read, or cuddle, you're in good company.</p>
+                        <a href="cat-room.html" class="text-link">Meet our Residents</a>
+                    </div>
+                </div>
+                <div style="order: 1;">
+                    <img src="assets/images/lounge.jpg" alt="Cozy Cat Lounge" class="feature-img aspect-landscape" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4) MENU PREVIEW (High Conversion Teaser) -->
+    <section class="section-alt">
+        <div class="wrap reveal reveal--fade">
+            <div class="text-center">
+                <span class="eyebrow">On the Menu</span>
+                <h2>Crafted for the conscious guest.</h2>
+            </div>
+            
+            <div class="menu-preview-grid">
+                <div class="menu-pill">
+                    <h3>Specialty Coffee</h3>
+                    <p class="text-muted">Drip, espresso, and seasonal lattes brewed with locally roasted beans.</p>
+                </div>
+                <div class="menu-pill">
+                    <h3>House Pastries</h3>
+                    <p class="text-muted">Freshly baked croissants and sweet treats delivered daily.</p>
+                </div>
+                <div class="menu-pill">
+                    <h3>Cat-Socks & More</h3>
+                    <p class="text-muted">Browse our curated selection of feline-inspired merch and local goods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5) VISIT DETAILS -->
+    <section id="visit">
+        <div class="wrap reveal reveal--up">
+            <div class="col-2-editorial">
+                <div>
+                    <span class="eyebrow">Plan Your Stay</span>
+                    <h2>Before You Visit</h2>
+                    <p class="text-muted">To ensure a calm atmosphere for our cats, we recommend booking in advance, especially on weekends.</p>
+                    
+                    <div class="editorial-list" style="margin-top: var(--space-lg);">
+                        <div class="list-item">
+                            <span class="list-item-title">Admission</span>
+                            <p class="list-item-desc">$10 for 30 minutes • $15 for 60 minutes</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-title">Address</span>
+                            <p class="list-item-desc">2533 Main St, Columbia, SC 29201</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-title">Socks Required</span>
+                            <p class="list-item-desc">Please bring a pair or purchase custom cat-socks at the desk.</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-title">Age Policy</span>
+                            <p class="list-item-desc">Ages 7+ welcome. Children must be supervised at all times.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="align-self: start;">
+                    <img src="assets/images/merch.png" alt="Cat Daddy Merch" class="feature-img aspect-landscape" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6) CONVERSION CTA (Option 2: Wax Seal) -->
+    <section id="book" class="section-alt section-narrow-v">
+        <div class="wrap text-center reveal reveal--up">
+            <div class="cta-block">
+                <span class="hairline-red"></span>
+                <h2>Ready to meet your match?</h2>
+                <p class="text-muted">Book your session now to guarantee your spot in the lounge. We can't wait to see you.</p>
+                <a href="tel:8037081562" class="btn btn-primary" style="padding: 18px 48px;">Call to Reserve Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="wrap">
+            <div class="footer-detailed">
+                <div class="footer-col">
+                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café" style="height: 48px; margin-bottom: var(--space-md); width: auto; object-fit: contain;">
+                    <p style="font-size: 0.9rem;">Where specialty coffee meets the soothing company of rescue cats. Established in Columbia, SC.</p>
+                </div>
+                
+                <div class="footer-col" style="padding-top: var(--space-md);">
+                    <h4>Experience</h4>
+                    <ul>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="cat-room.html">The Cat Room</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col" style="padding-top: var(--space-md);">
+                    <h4>Find Us</h4>
+                    <ul>
+                        <li>2533 Main St</li>
+                        <li>Columbia, SC 29201</li>
+                        <li>(803) 708-1562</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col" style="padding-top: var(--space-md);">
+                    <h4>Hours</h4>
+                    <ul>
+                        <li>Tue – Sun</li>
+                        <li>11:00 AM – 7:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/reveal.js" defer></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 1. Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

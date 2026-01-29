@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Cat Daddy Cat Cafe</title>
+    <meta name="description" content="The story of how three stray cats inspired the creation of Cat Daddy Cat Cafe.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <style>
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; }
+            .nav-brand { margin-bottom: 1rem; }
+            .nav-links { 
+                display: flex; 
+                width: 100%; 
+                justify-content: space-between; 
+                overflow-x: auto; 
+                padding-bottom: 0.5rem;
+                gap: 1.5rem;
+            }
+            .btn-small { display: none; }
+        }
+        .offer-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-md); margin-top: var(--space-lg); }
+        .offer-item { background: var(--color-bg-surface); padding: var(--space-md); border-radius: var(--radius-lg); border: 1px solid var(--color-border); }
+        .offer-title { font-family: var(--font-heading); font-weight: 600; font-size: 1.1rem; color: var(--color-accent); margin-bottom: 8px; display: block; }
+        
+        @media (min-width: 768px) {
+            .offer-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header id="mainHeader">
+        <div class="wrap navbar">
+            <a href="index.html" class="nav-brand">
+                <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café Logo" class="logo-img">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="about.html" class="nav-item active">About</a>
+                <a href="menu.html" class="nav-item">Menu</a>
+                <a href="events.html" class="nav-item">Events</a>
+                <a href="cat-room.html" class="nav-item">Cat Room</a>
+                <a href="#book" class="btn btn-primary btn-small">Book a Visit</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="hero-media hero-offset" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/aboout_ushero.png'); height: 75vh; background-position: center 20%;">
+        <div class="wrap" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: var(--space-xl);">
+            <div class="hero-text-floating reveal reveal--fade" style="max-width: 600px;">
+                <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Our Story</span>
+                <h1 style="font-size: 3.5rem;">The Heart of the Cafe.</h1>
+                <p style="font-size: 1.2rem;">Welcome to Cat Daddy Cat Cafe, where our love for cats and community comes together!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <section>
+        <div class="wrap">
+            <div class="col-2-editorial reveal reveal--up">
+                <div>
+                     <h2>The Origin</h2>
+                     <p>Our journey began in the most unexpected way, thanks to three curious stray cats who found their way into Mohammad's heart.</p>
+                     <p>These feline wanderers started following him around the neighborhood, and seeing their hunger, he couldn't resist feeding them. Soon, Mohammad's trio of furry friends grew into a lively gang.</p>
+                     <p>Determined to make a difference, they started bringing the stray cats in. And that's how <strong>Cat Daddy Cat Cafe</strong> was born — a place where rescued cats find a loving home and visitors get to enjoy their company!</p>
+                </div>
+                
+                <div>
+                    <h2>What We Offer</h2>
+                    <p class="text-muted">The perfect blend of relaxation, great coffee, and feline friendship.</p>
+                    
+                    <div class="offer-grid">
+                        <div class="offer-item reveal reveal--up" data-delay="70">
+                            <span class="offer-title">Quality Coffee</span>
+                            <p style="margin-bottom:0; font-size: 0.95rem;" class="text-muted">Freshly brewed specialty drinks and delicious treats.</p>
+                        </div>
+                        <div class="offer-item reveal reveal--up" data-delay="140">
+                            <span class="offer-title">Cat Companionship</span>
+                            <p style="margin-bottom:0; font-size: 0.95rem;" class="text-muted">Spend time with our friendly, well-cared-for resident cats.</p>
+                        </div>
+                        <div class="offer-item reveal reveal--up" data-delay="210">
+                            <span class="offer-title">Community Space</span>
+                            <p style="margin-bottom:0; font-size: 0.95rem;" class="text-muted">A welcoming place to relax, work, or meet new friends.</p>
+                        </div>
+                        <div class="offer-item reveal reveal--up" data-delay="280">
+                            <span class="offer-title">Adoption Events</span>
+                            <p style="margin-bottom:0; font-size: 0.95rem;" class="text-muted">Monthly adoption days to find your perfect companion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISIT SECTION -->
+    <section class="section-alt">
+        <div class="wrap content-narrow text-center reveal reveal--up">
+            <span class="eyebrow">Visit Us</span>
+            <h2>Come Say Hello!</h2>
+            <p class="text-muted">We're open Tuesday through Sunday, 11AM to 7PM. Walk-ins welcome, or call ahead for busy times and party bookings!</p>
+            <div class="action-row" style="justify-content: center;">
+                <a href="tel:8037081562" class="btn btn-primary">Call to Reserve</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="wrap">
+            <div class="footer-detailed">
+                <div class="footer-col">
+                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café" style="height: 48px; margin-bottom: var(--space-md); width: auto; object-fit: contain;">
+                    <p style="font-size: 0.9rem;">Where specialty coffee meets the soothing company of rescue cats. Established in Columbia, SC.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="cat-room.html">Cat Room</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>2533 Main St</li>
+                        <li>Columbia, SC 29201</li>
+                        <li>(803) 708-1562</li>
+                        <li><a href="mailto:catdaddyscatcafe@gmail.com">catdaddyscatcafe@gmail.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <ul>
+                        <li>Monday: Closed</li>
+                        <li>Tue-Sun: 11AM - 7PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script src="js/reveal.js" defer></script>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

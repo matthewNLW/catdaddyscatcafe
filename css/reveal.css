@@ -1,0 +1,47 @@
+/* 
+   Calming Guided Tour Reveal System
+   Slow, breath-like transitions that feel like floating into view.
+*/
+
+:root {
+    --reveal-duration: 1200ms;
+    --reveal-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --reveal-distance: 24px;
+}
+
+/* Base: content visible if JS fails */
+.reveal {
+    opacity: 1;
+    transform: none;
+}
+
+/* JS-enabled initial state - elements wait to be revealed */
+html.js-enabled .reveal {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+    transition: 
+        opacity var(--reveal-duration) var(--reveal-ease),
+        transform var(--reveal-duration) var(--reveal-ease);
+    transition-delay: var(--d, 0ms);
+}
+
+/* Visible state - gentle float into place */
+html.js-enabled .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fade-only variant for hero text */
+html.js-enabled .reveal--fade {
+    transform: none;
+}
+
+/* Reduced motion - instant visibility */
+@media (prefers-reduced-motion: reduce) {
+    html.js-enabled .reveal,
+    html.js-enabled .reveal.is-visible {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}

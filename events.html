@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Schedule | Cat Daddy Cat Cafe</title>
+    <meta name="description" content="Check our upcoming events including Cat Yoga, Movie Nights, and Adoption Days.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <style>
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; }
+            .nav-brand { margin-bottom: 1rem; }
+            .nav-links { display: flex; width: 100%; justify-content: space-between; overflow-x: auto; padding-bottom: 0.5rem; gap: 1.5rem; }
+            .btn-small { display: none; }
+        }
+
+        /* View Toggle & Filter UI */
+        .filter-controls {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: var(--space-md);
+        }
+
+        @media (min-width: 768px) {
+            .filter-controls {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: var(--space-xs);
+        }
+
+        .date-filter-group {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .date-input-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .date-input-wrapper label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-label);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .date-field {
+            padding: 8px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            background-color: white;
+            color: var(--color-text-main);
+        }
+
+        .toggle-btn {
+            background: none;
+            border: 1px solid var(--color-border);
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--color-text-muted);
+        }
+
+        .toggle-btn.active {
+            background-color: var(--color-accent);
+            color: white;
+            border-color: var(--color-accent);
+        }
+
+        /* 1. LIST VIEW STYLES */
+        .events-list-view {
+            display: block;
+        }
+
+        .event-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--color-border);
+            gap: var(--space-sm);
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .event-row {
+                grid-template-columns: 180px 1fr 150px;
+                gap: var(--space-lg);
+            }
+        }
+
+        .event-date-cell {
+            font-family: var(--font-body);
+            font-weight: 600;
+            color: var(--color-accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .event-info-cell h3 {
+            margin-bottom: 4px;
+            font-size: 1.25rem;
+        }
+
+        .event-info-cell p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+        }
+
+        .event-action-cell {
+            text-align: left;
+        }
+
+        @media (min-width: 768px) {
+            .event-action-cell {
+                text-align: right;
+            }
+        }
+
+        .price-tag {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--color-text-main);
+        }
+
+        /* 2. CARD VIEW STYLES */
+        .events-card-view {
+            display: none; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .event-card {
+            background: white;
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .event-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+        }
+
+        /* No results message */
+        #noResults {
+            display: none;
+            padding: var(--space-xl) 0;
+            text-align: center;
+            font-style: italic;
+            color: var(--color-text-muted);
+        }
+
+        /* Utility classes for toggling */
+        .hidden { display: none !important; }
+        .grid-display { display: grid !important; }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header id="mainHeader">
+        <div class="wrap navbar">
+            <a href="index.html" class="nav-brand">
+                <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café Logo" class="logo-img">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="about.html" class="nav-item">About</a>
+                <a href="menu.html" class="nav-item">Menu</a>
+                <a href="events.html" class="nav-item active">Events</a>
+                <a href="cat-room.html" class="nav-item">Cat Room</a>
+                <a href="#book" class="btn btn-primary btn-small">Book a Visit</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="section-alt hero-offset">
+        <div class="wrap content-narrow reveal reveal--fade">
+            <span class="eyebrow">Schedule</span>
+            <h1>Upcoming Events</h1>
+            <p class="text-muted">Filter by date and find your perfect time in the lounge. Choose your preferred view for browsing.</p>
+        </div>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section>
+        <div class="wrap">
+            
+            <!-- CONTROLS: VIEW TOGGLE & DATE FILTER -->
+            <div class="filter-controls reveal reveal--up">
+                
+                <!-- Date Picker Group -->
+                <div class="date-filter-group">
+                    <div class="date-input-wrapper">
+                        <label for="startDate">From</label>
+                        <input type="date" id="startDate" class="date-field" onchange="applyFilters()">
+                    </div>
+                    <div class="date-input-wrapper">
+                        <label for="endDate">To</label>
+                        <input type="date" id="endDate" class="date-field" onchange="applyFilters()">
+                    </div>
+                    <button class="toggle-btn" onclick="clearFilters()" style="margin-top: 1.2rem;">Clear</button>
+                </div>
+
+                <!-- View Toggle -->
+                <div class="view-toggle">
+                    <button id="listToggle" class="toggle-btn active" onclick="setView('list')">List View</button>
+                    <button id="cardToggle" class="toggle-btn" onclick="setView('card')">Card View</button>
+                </div>
+            </div>
+
+            <!-- EVENT DATA (To be filtered by JS) -->
+            <!-- Note: data-date is YYYY-MM-DD. For recurring Sat, we'll use a distant future date or specific logic -->
+            
+            <div id="listView" class="events-list-view">
+                <!-- Event 1 (Weekly - Using multiple for example range) -->
+                <div class="event-item list-variant" data-date="2026-01-31">
+                    <div class="event-row">
+                        <div class="event-date-cell">Jan 31<br>9:00 AM</div>
+                        <div class="event-info-cell">
+                            <h3>Cat Yoga (Mew-ga)</h3>
+                            <p>A relaxing 50-minute yoga session surrounded by our resident cats.</p>
+                        </div>
+                        <div class="event-action-cell">
+                            <span class="price-tag">$20.00</span>
+                            <a href="tel:8037081562" class="btn btn-primary btn-small">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2 (Feb 1) -->
+                <div class="event-item list-variant" data-date="2026-02-01">
+                    <div class="event-row">
+                        <div class="event-date-cell">Feb 1<br>10:00 AM</div>
+                        <div class="event-info-cell">
+                            <h3>Adoption Days</h3>
+                            <p>Meet our newest rescues and find your forever companion.</p>
+                        </div>
+                        <div class="event-action-cell">
+                            <span class="price-tag">Free Entry</span>
+                            <a href="cat-room.html" class="btn btn-primary btn-small">View Cats</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 (Feb 14) -->
+                <div class="event-item list-variant" data-date="2026-02-14">
+                    <div class="event-row">
+                        <div class="event-date-cell">Feb 14<br>6:00 PM</div>
+                        <div class="event-info-cell">
+                            <h3>Valentine’s Date Night</h3>
+                            <p>A romantic evening in the lounge with sweet treats and feline friends.</p>
+                        </div>
+                        <div class="event-action-cell">
+                            <span class="price-tag">$25.00</span>
+                            <a href="tel:8037081562" class="btn btn-primary btn-small">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 4 (Oct 15) -->
+                <div class="event-item list-variant" data-date="2026-10-15">
+                    <div class="event-row">
+                        <div class="event-date-cell">Oct 15<br>6:00 PM</div>
+                        <div class="event-info-cell">
+                            <h3>Movie Night</h3>
+                            <p>Enjoy a cozy film screening in the cat room with popcorn included.</p>
+                        </div>
+                        <div class="event-action-cell">
+                            <span class="price-tag">$18.00</span>
+                            <a href="tel:8037081562" class="btn btn-primary btn-small">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD VIEW DATA -->
+            <div id="cardView" class="events-card-view">
+                <!-- Card 1 -->
+                <div class="event-item card-variant" data-date="2026-01-31">
+                    <div class="event-card">
+                        <div>
+                            <span class="event-date-cell">Jan 31 • 9AM</span>
+                            <h3>Cat Yoga</h3>
+                            <p class="text-muted" style="font-size: 0.9rem;">A relaxing 50-minute yoga session surrounded by our resident cats.</p>
+                        </div>
+                        <div style="margin-top: 24px;">
+                            <span class="price-tag">$20.00</span>
+                            <a href="tel:8037081562" class="btn btn-primary btn-small" style="width: 100%;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="event-item card-variant" data-date="2026-02-01">
+                    <div class="event-card">
+                        <div>
+                            <span class="event-date-cell">Feb 1 • 10AM</span>
+                            <h3>Adoption Days</h3>
+                            <p class="text-muted" style="font-size: 0.9rem;">Meet our newest rescues and find your perfect companion.</p>
+                        </div>
+                        <div style="margin-top: 24px;">
+                            <span class="price-tag">Free</span>
+                            <a href="cat-room.html" class="btn btn-primary btn-small" style="width: 100%;">Meet Cats</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="event-item card-variant" data-date="2026-02-14">
+                    <div class="event-card">
+                        <div>
+                            <span class="event-date-cell">Feb 14 • 6PM</span>
+                            <h3>Valentine's Date</h3>
+                            <p class="text-muted" style="font-size: 0.9rem;">A romantic evening in the lounge with treats and cats.</p>
+                        </div>
+                        <div style="margin-top: 24px;">
+                            <span class="price-tag">$25.00</span>
+                            <a href="tel:8037081562" class="btn btn-primary btn-small" style="width: 100%;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="event-item card-variant" data-date="2026-10-15">
+                    <div class="event-card">
+                        <div>
+                            <span class="event-date-cell">Oct 15 • 6PM</span>
+                            <h3>Movie Night</h3>
+                            <p class="text-muted" style="font-size: 0.9rem;">Enjoy a cozy film screening with the cats. Popcorn provided.</p>
+                        </div>
+                        <div style="margin-top: 24px;">
+                            <span class="price-tag">$18.00</span>
+                            <a href="tel:8037081562" class="btn btn-primary btn-small" style="width: 100%;">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No results message -->
+            <div id="noResults">No events found for the selected date range.</div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="wrap">
+            <div class="footer-detailed">
+                <div class="footer-col">
+                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café" style="height: 48px; margin-bottom: var(--space-md); width: auto; object-fit: contain;">
+                    <p style="font-size: 0.9rem;">Where specialty coffee meets the soothing company of rescue cats. Established in Columbia, SC.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="cat-room.html">Cat Room</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>2533 Main St</li>
+                        <li>Columbia, SC 29201</li>
+                        <li>(803) 708-1562</li>
+                        <li><a href="mailto:catdaddyscatcafe@gmail.com">catdaddyscatcafe@gmail.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <ul>
+                        <li>Monday: Closed</li>
+                        <li>Tue-Sun: 11AM - 7PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                &copy; <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script src="js/reveal.js" defer></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Prevent selecting past dates
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('startDate').setAttribute('min', today);
+        document.getElementById('endDate').setAttribute('min', today);
+
+        let currentView = 'list';
+
+        function setView(view) {
+            currentView = view;
+            const listToggle = document.getElementById('listToggle');
+            const cardToggle = document.getElementById('cardToggle');
+            const listView = document.getElementById('listView');
+            const cardView = document.getElementById('cardView');
+
+            if (view === 'list') {
+                listView.style.display = 'block';
+                cardView.classList.remove('grid-display');
+                listToggle.classList.add('active');
+                cardToggle.classList.remove('active');
+            } else {
+                listView.style.display = 'none';
+                cardView.classList.add('grid-display');
+                listToggle.classList.remove('active');
+                cardToggle.classList.add('active');
+            }
+            // Re-apply filters to sync the newly visible view
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const start = document.getElementById('startDate').value;
+            const end = document.getElementById('endDate').value;
+            const noResults = document.getElementById('noResults');
+            
+            // Get items for the current view
+            const selector = currentView === 'list' ? '.list-variant' : '.card-variant';
+            const items = document.querySelectorAll(selector);
+            
+            // Hide items in the other view
+            const otherSelector = currentView === 'list' ? '.card-variant' : '.list-variant';
+            document.querySelectorAll(otherSelector).forEach(item => item.style.display = 'none');
+
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const dateVal = item.getAttribute('data-date');
+                let visible = true;
+
+                if (start && dateVal < start) visible = false;
+                if (end && dateVal > end) visible = false;
+
+                if (visible) {
+                    item.style.display = currentView === 'list' ? 'block' : 'flex';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function clearFilters() {
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            applyFilters();
+        }
+
+        // Initialize display
+        applyFilters();
+    </script>
+</body>
+</html>
