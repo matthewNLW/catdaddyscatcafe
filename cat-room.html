@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,23 @@
     <meta name="description" content="Meet our residents and book your time in the lounge.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#F6F1EB">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
     <style>
         @media (max-width: 768px) {
-            .navbar { flex-wrap: wrap; }
-            .nav-brand { margin-bottom: 1rem; }
-            .nav-links { display: flex; width: 100%; justify-content: space-between; overflow-x: auto; padding-bottom: 0.5rem; gap: 1.5rem; }
-            .btn-small { display: none; }
+            /* Navbar overrides removed - handled by components.css globally now */
+            /* .navbar { flex-wrap: wrap; } */
         }
+
         /* Calm Grid Layout */
         .cat-grid {
             display: grid;
@@ -65,7 +71,8 @@
             width: 100%;
             height: 100%;
             padding: var(--space-xl);
-            background-color: #fdfaf7; /* Soft editorial cream */
+            background-color: #fdfaf7;
+            /* Soft editorial cream */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -76,7 +83,8 @@
             pointer-events: none;
             font-size: 1.15rem;
             line-height: 1.8;
-            font-family: var(--font-heading); /* Using Serif for editorial feel */
+            font-family: var(--font-heading);
+            /* Using Serif for editorial feel */
             font-style: italic;
             color: var(--color-text-main);
             z-index: 2;
@@ -211,8 +219,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Nav Link for FAQ */
@@ -244,14 +259,16 @@
             z-index: 2000;
             transition: bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             border-radius: 24px 24px 0 0;
-            box-shadow: 0 -30px 90px rgba(0,0,0,0.15);
+            box-shadow: 0 -30px 90px rgba(0, 0, 0, 0.15);
             padding: var(--space-xl);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
         }
 
-        .cat-modal.active { bottom: 0; }
+        .cat-modal.active {
+            bottom: 0;
+        }
 
         .modal-overlay {
             position: fixed;
@@ -259,7 +276,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1999;
             opacity: 0;
             visibility: hidden;
@@ -267,7 +284,10 @@
             backdrop-filter: blur(8px);
         }
 
-        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
         .modal-close {
             align-self: flex-end;
@@ -286,11 +306,19 @@
         }
 
         @media (min-width: 1024px) {
-            .cat-modal { height: 70vh; padding: var(--space-xxl); }
-            .modal-content-grid { grid-template-columns: 1fr 1.2fr; gap: var(--space-xxl); }
+            .cat-modal {
+                height: 70vh;
+                padding: var(--space-xxl);
+            }
+
+            .modal-content-grid {
+                grid-template-columns: 1fr 1.2fr;
+                gap: var(--space-xxl);
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- NAV -->
@@ -299,6 +327,15 @@
             <a href="index.html" class="nav-brand">
                 <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café Logo" class="logo-img">
             </a>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-nav-toggle" id="navToggle" aria-label="Toggle Navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Desktop Nav -->
             <nav class="nav-links">
                 <a href="index.html" class="nav-item">Home</a>
                 <a href="about.html" class="nav-item">About</a>
@@ -310,14 +347,29 @@
         </div>
     </header>
 
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav-overlay" id="navOverlay">
+        <button class="close-nav" id="closeNav" aria-label="Close Menu">&times;</button>
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="about.html" class="mobile-nav-link">About</a>
+        <a href="menu.html" class="mobile-nav-link">Menu</a>
+        <a href="events.html" class="mobile-nav-link">Events</a>
+        <a href="cat-room.html" class="mobile-nav-link active">Cat Room</a>
+        <a href="#book" class="btn btn-primary" style="margin-top: 24px;">Book a Visit</a>
+    </div>
+
     <!-- PAGE HERO -->
-    <section class="hero-media hero-offset" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/cat_room.jpg'); height: 65vh;">
-        <div class="wrap" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: var(--space-xl);">
+    <section class="hero-media hero-offset"
+        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/cat_room.jpg'); min-height: 65vh; height: auto; display: flex; align-items: center;">
+        <div class="wrap" style="padding: var(--space-lg) 0;">
             <div class="hero-text-floating" style="max-width: 600px;">
                 <span class="eyebrow" style="color: rgba(255,255,255,0.8);">The Lounge</span>
-                <h1 style="font-size: 3.5rem;">Meet the Residents.</h1>
-                <p style="font-size: 1.2rem; margin-bottom: 1rem;">Our cat room is home to 12-15 rescue cats at any given time. Explore our peaceful sanctuary.</p>
-                <a href="#faqs" class="faq-jump-link" style="color: white; border-color: rgba(255,255,255,0.4);">Cat Room FAQs</a>
+                <h1 style="font-size: clamp(2.2rem, 8vw, 3.5rem); line-height: 1.15;">Meet the Residents.</h1>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Our cat room is home to 12-15
+                    rescue cats at any
+                    given time. Explore our peaceful sanctuary.</p>
+                <a href="#faqs" class="faq-jump-link" style="color: white; border-color: rgba(255,255,255,0.4);">Cat
+                    Room FAQs</a>
             </div>
         </div>
     </section>
@@ -329,13 +381,17 @@
                 <span class="eyebrow">Meet our Residents</span>
                 <h2>Current Residents</h2>
             </div>
-            
+
             <div class="cat-grid">
                 <!-- 1. Ishtah -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="0" onclick="openCatModal('Ishtah', 'Buff Tabby', 'Adventurous & Intelligent', 'Translates to “sweet cream” in Arabic, pairing well with his brother Mish Mish. Together they are apricots and cream! This ball of fuzz is a total cuddlebug.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858860650x155195643464570270/Screenshot%202025-07-18%20131410.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="0"
+                    onclick="openCatModal('Ishtah', 'Buff Tabby', 'Adventurous & Intelligent', 'Translates to “sweet cream” in Arabic, pairing well with his brother Mish Mish. Together they are apricots and cream! This ball of fuzz is a total cuddlebug.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858860650x155195643464570270/Screenshot%202025-07-18%20131410.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858860650x155195643464570270/Screenshot%202025-07-18%20131410.png" alt="Ishtah" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">Translates to “sweet cream” in Arabic, pairing well with his brother Mish Mish. Together they are apricots and cream! This ball of fuzz is a total cuddlebug.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858860650x155195643464570270/Screenshot%202025-07-18%20131410.png"
+                            alt="Ishtah" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">Translates to “sweet cream” in Arabic, pairing well with his brother
+                            Mish Mish. Together they are apricots and cream! This ball of fuzz is a total cuddlebug.
+                        </div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Ishtah</h3>
@@ -344,10 +400,13 @@
                 </div>
 
                 <!-- 2. Ace -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="70" onclick="openCatModal('Ace', 'Bicolor Cat', 'Silly & Cuddly', 'The card-dealing magician. Like your card, she will disappear in an instant or just in a tunnel! Ace got her name due to the spade shape on her face.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858378795x880454986662984000/Screenshot%202025-07-18%20130611.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="70"
+                    onclick="openCatModal('Ace', 'Bicolor Cat', 'Silly & Cuddly', 'The card-dealing magician. Like your card, she will disappear in an instant or just in a tunnel! Ace got her name due to the spade shape on her face.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858378795x880454986662984000/Screenshot%202025-07-18%20130611.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858378795x880454986662984000/Screenshot%202025-07-18%20130611.png" alt="Ace" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">The card-dealing magician. Like your card, she will disappear in an instant or just in a tunnel! Ace got her name due to the spade shape on her face.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858378795x880454986662984000/Screenshot%202025-07-18%20130611.png"
+                            alt="Ace" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">The card-dealing magician. Like your card, she will disappear in an
+                            instant or just in a tunnel! Ace got her name due to the spade shape on her face.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Ace</h3>
@@ -356,10 +415,13 @@
                 </div>
 
                 <!-- 3. Star -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="140" onclick="openCatModal('Star', 'Bicolor Cat', 'Timid & Authentic', 'Though she is shy, she is getting more comfortable by the day! You will catch her curiously peaking at you from a distance as she explores.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858407622x939423904659950800/Screenshot%202025-07-18%20130639.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="140"
+                    onclick="openCatModal('Star', 'Bicolor Cat', 'Timid & Authentic', 'Though she is shy, she is getting more comfortable by the day! You will catch her curiously peaking at you from a distance as she explores.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858407622x939423904659950800/Screenshot%202025-07-18%20130639.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858407622x939423904659950800/Screenshot%202025-07-18%20130639.png" alt="Star" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">Though she is shy, she is getting more comfortable by the day! You will catch her curiously peaking at you from a distance as she explores.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858407622x939423904659950800/Screenshot%202025-07-18%20130639.png"
+                            alt="Star" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">Though she is shy, she is getting more comfortable by the day! You
+                            will catch her curiously peaking at you from a distance as she explores.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Star</h3>
@@ -368,10 +430,13 @@
                 </div>
 
                 <!-- 4. Dart -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="210" onclick="openCatModal('Dart', 'Bicolor Cat', 'Spaztastic & Semi-Sweet', 'Got his name due to his energetic spirit and curiosity. You will most likely see him sprinting through the lounge at high speeds!', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858440975x663830638917115400/Screenshot%202025-07-18%20130709.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="210"
+                    onclick="openCatModal('Dart', 'Bicolor Cat', 'Spaztastic & Semi-Sweet', 'Got his name due to his energetic spirit and curiosity. You will most likely see him sprinting through the lounge at high speeds!', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858440975x663830638917115400/Screenshot%202025-07-18%20130709.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858440975x663830638917115400/Screenshot%202025-07-18%20130709.png" alt="Dart" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">Got his name due to his energetic spirit and curiosity. You will most likely see him sprinting through the lounge at high speeds!</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858440975x663830638917115400/Screenshot%202025-07-18%20130709.png"
+                            alt="Dart" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">Got his name due to his energetic spirit and curiosity. You will
+                            most likely see him sprinting through the lounge at high speeds!</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Dart</h3>
@@ -380,10 +445,13 @@
                 </div>
 
                 <!-- 5. Mish Mish -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="280" onclick="openCatModal('Mish Mish', 'Orange Tabby', 'Friendly & Playful', '“Mish Mish” translates to apricot in Arabic. He loves new toys, window beds, and wrestling with Mac when he gets a burst of energy.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858476107x906533797485295000/Screenshot%202025-07-18%20130743.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="280"
+                    onclick="openCatModal('Mish Mish', 'Orange Tabby', 'Friendly & Playful', '“Mish Mish” translates to apricot in Arabic. He loves new toys, window beds, and wrestling with Mac when he gets a burst of energy.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858476107x906533797485295000/Screenshot%202025-07-18%20130743.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858476107x906533797485295000/Screenshot%202025-07-18%20130743.png" alt="Mish Mish" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">“Mish Mish” translates to apricot in Arabic. He loves new toys, window beds, and wrestling with Mac when he gets a burst of energy.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858476107x906533797485295000/Screenshot%202025-07-18%20130743.png"
+                            alt="Mish Mish" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">“Mish Mish” translates to apricot in Arabic. He loves new toys,
+                            window beds, and wrestling with Mac when he gets a burst of energy.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Mish Mish</h3>
@@ -392,10 +460,13 @@
                 </div>
 
                 <!-- 6. Mac -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="350" onclick="openCatModal('Mac', 'Bombay', 'Energetic & Affectionate', 'This ball of energy craves attention at all times. He loves Cat MMA and running on the Cat Wheel to burn off some of that enthusiasm.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858514896x937429214924570600/Screenshot%202025-07-18%20130818.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="350"
+                    onclick="openCatModal('Mac', 'Bombay', 'Energetic & Affectionate', 'This ball of energy craves attention at all times. He loves Cat MMA and running on the Cat Wheel to burn off some of that enthusiasm.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858514896x937429214924570600/Screenshot%202025-07-18%20130818.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858514896x937429214924570600/Screenshot%202025-07-18%20130818.png" alt="Mac" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">This ball of energy craves attention at all times. He loves Cat MMA and running on the Cat Wheel to burn off some of that enthusiasm.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858514896x937429214924570600/Screenshot%202025-07-18%20130818.png"
+                            alt="Mac" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">This ball of energy craves attention at all times. He loves Cat MMA
+                            and running on the Cat Wheel to burn off some of that enthusiasm.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Mac</h3>
@@ -404,10 +475,13 @@
                 </div>
 
                 <!-- 7. Tigger -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="420" onclick="openCatModal('Tigger', 'Orange Tabby', 'Calm & Social', 'The Zen Master with a special talent for napping anywhere. He may look grumpy 24/7 but it’s just his legendary orange cattitude!', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858545412x384912142296393900/Screenshot%202025-07-18%20130853.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="420"
+                    onclick="openCatModal('Tigger', 'Orange Tabby', 'Calm & Social', 'The Zen Master with a special talent for napping anywhere. He may look grumpy 24/7 but it’s just his legendary orange cattitude!', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858545412x384912142296393900/Screenshot%202025-07-18%20130853.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858545412x384912142296393900/Screenshot%202025-07-18%20130853.png" alt="Tigger" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">The Zen Master with a special talent for napping anywhere. He may look grumpy 24/7 but it’s just his legendary orange cattitude!</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858545412x384912142296393900/Screenshot%202025-07-18%20130853.png"
+                            alt="Tigger" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">The Zen Master with a special talent for napping anywhere. He may
+                            look grumpy 24/7 but it’s just his legendary orange cattitude!</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Tigger</h3>
@@ -416,10 +490,13 @@
                 </div>
 
                 <!-- 8. Homie -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="420" onclick="openCatModal('Homie', 'Bombay', 'Curious & Loyal', 'Named after being donated by a homeless man, Homie is the lazier of the Bombays. You can tell him apart by the prominent spot on his neck.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858580765x554601021039609700/Screenshot%202025-07-18%20130932.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="420"
+                    onclick="openCatModal('Homie', 'Bombay', 'Curious & Loyal', 'Named after being donated by a homeless man, Homie is the lazier of the Bombays. You can tell him apart by the prominent spot on his neck.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858580765x554601021039609700/Screenshot%202025-07-18%20130932.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858580765x554601021039609700/Screenshot%202025-07-18%20130932.png" alt="Homie" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">Named after being donated by a homeless man, Homie is the lazier of the Bombays. You can tell him apart by the prominent spot on his neck.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858580765x554601021039609700/Screenshot%202025-07-18%20130932.png"
+                            alt="Homie" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">Named after being donated by a homeless man, Homie is the lazier of
+                            the Bombays. You can tell him apart by the prominent spot on his neck.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Homie</h3>
@@ -428,10 +505,13 @@
                 </div>
 
                 <!-- 9. Wolverine -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="420" onclick="openCatModal('Wolverine', 'Ghost Tabby', 'Loyal & Brave', 'A Ghost Tabby whose stripes appear in the sunlight. She’s always climbing to new heights and exploring every inch of the lounge.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858610500x735367346442138900/Screenshot%202025-07-18%20131003.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="420"
+                    onclick="openCatModal('Wolverine', 'Ghost Tabby', 'Loyal & Brave', 'A Ghost Tabby whose stripes appear in the sunlight. She’s always climbing to new heights and exploring every inch of the lounge.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858610500x735367346442138900/Screenshot%202025-07-18%20131003.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858610500x735367346442138900/Screenshot%202025-07-18%20131003.png" alt="Wolverine" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">A Ghost Tabby whose stripes appear in the sunlight. She’s always climbing to new heights and exploring every inch of the lounge.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858610500x735367346442138900/Screenshot%202025-07-18%20131003.png"
+                            alt="Wolverine" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">A Ghost Tabby whose stripes appear in the sunlight. She’s always
+                            climbing to new heights and exploring every inch of the lounge.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Wolverine</h3>
@@ -440,10 +520,13 @@
                 </div>
 
                 <!-- 10. Blondie Jr. -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="420" onclick="openCatModal('Blondie Jr.', 'Orange Tabby', 'Confident & Relaxed', 'The chill big bro of the lounge. He patrols the room keeping everyone in check but prefers solo naps in quiet corners.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858640905x770725274153878800/Screenshot%202025-07-18%20131032.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="420"
+                    onclick="openCatModal('Blondie Jr.', 'Orange Tabby', 'Confident & Relaxed', 'The chill big bro of the lounge. He patrols the room keeping everyone in check but prefers solo naps in quiet corners.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858640905x770725274153878800/Screenshot%202025-07-18%20131032.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858640905x770725274153878800/Screenshot%202025-07-18%20131032.png" alt="Blondie Jr." class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">The chill big bro of the lounge. He patrols the room keeping everyone in check but prefers solo naps in quiet corners.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858640905x770725274153878800/Screenshot%202025-07-18%20131032.png"
+                            alt="Blondie Jr." class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">The chill big bro of the lounge. He patrols the room keeping
+                            everyone in check but prefers solo naps in quiet corners.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Blondie Jr.</h3>
@@ -452,10 +535,13 @@
                 </div>
 
                 <!-- 11. Miss Mustache -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="420" onclick="openCatModal('Miss Mustache', 'Tuxedo', 'Shy & Gentle', 'Formerly known as Mr. Mustache! She’s a gentle wallflower who hesitates at first but warms up quickly once she gets to know you.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858689523x661959686586232400/Screenshot%202025-07-18%20131116.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="420"
+                    onclick="openCatModal('Miss Mustache', 'Tuxedo', 'Shy & Gentle', 'Formerly known as Mr. Mustache! She’s a gentle wallflower who hesitates at first but warms up quickly once she gets to know you.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858689523x661959686586232400/Screenshot%202025-07-18%20131116.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858689523x661959686586232400/Screenshot%202025-07-18%20131116.png" alt="Miss Mustache" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">Formerly known as Mr. Mustache! She’s a gentle wallflower who hesitates at first but warms up quickly once she gets to know you.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858689523x661959686586232400/Screenshot%202025-07-18%20131116.png"
+                            alt="Miss Mustache" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">Formerly known as Mr. Mustache! She’s a gentle wallflower who
+                            hesitates at first but warms up quickly once she gets to know you.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Miss Mustache</h3>
@@ -464,10 +550,13 @@
                 </div>
 
                 <!-- 12. Shadow -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="420" onclick="openCatModal('Shadow', 'Tortoiseshell', 'Mysterious & Sweet', 'An elusive beauty who observes from high perches. She might look like she’s judging you, but she’s truly a sweetheart at heart.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858720101x241857418025630750/Screenshot%202025-07-18%20131150.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="420"
+                    onclick="openCatModal('Shadow', 'Tortoiseshell', 'Mysterious & Sweet', 'An elusive beauty who observes from high perches. She might look like she’s judging you, but she’s truly a sweetheart at heart.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858720101x241857418025630750/Screenshot%202025-07-18%20131150.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858720101x241857418025630750/Screenshot%202025-07-18%20131150.png" alt="Shadow" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">An elusive beauty who observes from high perches. She might look like she’s judging you, but she’s truly a sweetheart at heart.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858720101x241857418025630750/Screenshot%202025-07-18%20131150.png"
+                            alt="Shadow" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">An elusive beauty who observes from high perches. She might look
+                            like she’s judging you, but she’s truly a sweetheart at heart.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Shadow</h3>
@@ -476,10 +565,13 @@
                 </div>
 
                 <!-- 13. Roxy -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="420" onclick="openCatModal('Roxy', 'Torbie', 'Calm & Reserved', 'The big sister of the group. If the sun is out, you’ll find her claimed by a window bed, napping 90% of the day away.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858762632x217158203544656420/Screenshot%202025-07-18%20131223.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="420"
+                    onclick="openCatModal('Roxy', 'Torbie', 'Calm & Reserved', 'The big sister of the group. If the sun is out, you’ll find her claimed by a window bed, napping 90% of the day away.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858762632x217158203544656420/Screenshot%202025-07-18%20131223.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858762632x217158203544656420/Screenshot%202025-07-18%20131223.png" alt="Roxy" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">The big sister of the group. If the sun is out, you’ll find her claimed by a window bed, napping 90% of the day away.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858762632x217158203544656420/Screenshot%202025-07-18%20131223.png"
+                            alt="Roxy" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">The big sister of the group. If the sun is out, you’ll find her
+                            claimed by a window bed, napping 90% of the day away.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Roxy</h3>
@@ -488,10 +580,13 @@
                 </div>
 
                 <!-- 14. Precious -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="420" onclick="openCatModal('Precious', 'Calico', 'Sassy & Regal', 'A true Calico queen who begs for attention only on her terms. She loves watching the world go by from her favorite window spot.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858793175x378534834379207400/Screenshot%202025-07-18%20131304.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="420"
+                    onclick="openCatModal('Precious', 'Calico', 'Sassy & Regal', 'A true Calico queen who begs for attention only on her terms. She loves watching the world go by from her favorite window spot.', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858793175x378534834379207400/Screenshot%202025-07-18%20131304.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858793175x378534834379207400/Screenshot%202025-07-18%20131304.png" alt="Precious" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">A true Calico queen who begs for attention only on her terms. She loves watching the world go by from her favorite window spot.</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858793175x378534834379207400/Screenshot%202025-07-18%20131304.png"
+                            alt="Precious" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">A true Calico queen who begs for attention only on her terms. She
+                            loves watching the world go by from her favorite window spot.</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Precious</h3>
@@ -500,10 +595,13 @@
                 </div>
 
                 <!-- 15. Sugar -->
-                <div class="cat-card reveal reveal--up reveal--card" data-delay="420" onclick="openCatModal('Sugar', 'Calico', 'Independent & Vocal', 'Rules the kingdom from her cheetah print throne. She loves being the center of attention and will vocalize to get her way!', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858827513x536768776467293700/Screenshot%202025-07-18%20131337.png')">
+                <div class="cat-card reveal reveal--up reveal--card" data-delay="420"
+                    onclick="openCatModal('Sugar', 'Calico', 'Independent & Vocal', 'Rules the kingdom from her cheetah print throne. She loves being the center of attention and will vocalize to get her way!', 'https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858827513x536768776467293700/Screenshot%202025-07-18%20131337.png')">
                     <div class="cat-img-wrapper">
-                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858827513x536768776467293700/Screenshot%202025-07-18%20131337.png" alt="Sugar" class="cat-img" loading="lazy">
-                        <div class="cat-hover-desc">Rules the kingdom from her cheetah print throne. She loves being the center of attention and will vocalize to get her way!</div>
+                        <img src="https://b1ad34f188d7df5b7122692651c137c2.cdn.bubble.io/f1752858827513x536768776467293700/Screenshot%202025-07-18%20131337.png"
+                            alt="Sugar" class="cat-img" loading="lazy">
+                        <div class="cat-hover-desc">Rules the kingdom from her cheetah print throne. She loves being the
+                            center of attention and will vocalize to get her way!</div>
                     </div>
                     <div class="cat-card-info">
                         <h3 class="cat-name">Sugar</h3>
@@ -524,7 +622,8 @@
                 <details class="faq-item">
                     <summary>Do I need to wear Socks?</summary>
                     <div class="faq-answer">
-                        Yes, we request no shoes in the cat room to keep it clean but you must wear socks. If you don't bring socks you can buy a pair of cat socks in our shop.
+                        Yes, we request no shoes in the cat room to keep it clean but you must wear socks. If you don't
+                        bring socks you can buy a pair of cat socks in our shop.
                     </div>
                 </details>
 
@@ -545,28 +644,32 @@
                 <details class="faq-item">
                     <summary>Do you have to make a reservation?</summary>
                     <div class="faq-answer">
-                        No, we accept walk-ins but it is recommended during our busy hours which is usually afternoons and weekends.
+                        No, we accept walk-ins but it is recommended during our busy hours which is usually afternoons
+                        and weekends.
                     </div>
                 </details>
 
                 <details class="faq-item">
                     <summary>Where did you get the cats?</summary>
                     <div class="faq-answer">
-                        Most were found in the neighborhood of NOMA by Al Amir or brought to Mohammed by their mothers to get help with their kittens.
+                        Most were found in the neighborhood of NOMA by Al Amir or brought to Mohammed by their mothers
+                        to get help with their kittens.
                     </div>
                 </details>
 
                 <details class="faq-item">
                     <summary>Do we adopt out our cats?</summary>
                     <div class="faq-answer">
-                        No, our cafe cats are residents here at Cat Daddy Cat Cafe. Unlike some other cat cafes in the U.S. But no worries! We will host adoption days for you to come and find your new furry friend!
+                        No, our cafe cats are residents here at Cat Daddy Cat Cafe. Unlike some other cat cafes in the
+                        U.S. But no worries! We will host adoption days for you to come and find your new furry friend!
                     </div>
                 </details>
 
                 <details class="faq-item">
                     <summary>When will we have adoption days?</summary>
                     <div class="faq-answer">
-                        Once or twice a month we will host adoption days. Keep an eye out on our social media for all updates regarding adoption days!
+                        Once or twice a month we will host adoption days. Keep an eye out on our social media for all
+                        updates regarding adoption days!
                     </div>
                 </details>
 
@@ -580,7 +683,8 @@
                 <details class="faq-item">
                     <summary>Can I make donations?</summary>
                     <div class="faq-answer">
-                        Depending on what it is you’re interesting in donating, please give us a call. We accept toys as long as they are unused.
+                        Depending on what it is you’re interesting in donating, please give us a call. We accept toys as
+                        long as they are unused.
                     </div>
                 </details>
             </div>
@@ -592,17 +696,22 @@
     <div class="cat-modal" id="catModal">
         <button class="modal-close" onclick="closeCatModal()">×</button>
         <div class="modal-content-grid">
-            <img id="modalImg" src="" alt="" style="width: 100%; border-radius: 8px; aspect-ratio: 4/5; object-fit: cover;">
+            <img id="modalImg" src="" alt=""
+                style="width: 100%; border-radius: 8px; aspect-ratio: 4/5; object-fit: cover;">
             <div>
                 <span id="modalBreed" class="eyebrow" style="color: var(--color-accent);">Breed</span>
                 <h2 id="modalName" style="margin-bottom: var(--space-xs);">Cat Name</h2>
-                <span id="modalTrait" style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; display: block; margin-bottom: var(--space-md);">Trait</span>
-                <p id="modalDesc" class="text-muted" style="font-size: 1.1rem; line-height: 1.6;">Full description goes here.</p>
+                <span id="modalTrait"
+                    style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; display: block; margin-bottom: var(--space-md);">Trait</span>
+                <p id="modalDesc" class="text-muted" style="font-size: 1.1rem; line-height: 1.6;">Full description goes
+                    here.</p>
                 <div style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid #eee;">
-                    <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #999; display: block; margin-bottom: 4px;">Status</span>
+                    <span
+                        style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #999; display: block; margin-bottom: 4px;">Status</span>
                     <span style="font-weight: 600; color: var(--color-accent);">Permanent Resident</span>
                 </div>
-                <a href="#book" class="btn btn-primary" style="margin-top: var(--space-lg);" onclick="closeCatModal()">Book a Visit to Meet Them</a>
+                <a href="#book" class="btn btn-primary" style="margin-top: var(--space-lg);"
+                    onclick="closeCatModal()">Book a Visit to Meet Them</a>
             </div>
         </div>
     </div>
@@ -611,27 +720,22 @@
     <footer id="footer">
         <div class="wrap">
             <div class="footer-detailed">
-                <div class="footer-col">
-                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café" style="height: 48px; margin-bottom: var(--space-md); width: auto; object-fit: contain;">
-                    <p style="font-size: 0.9rem;">Where specialty coffee meets the soothing company of rescue cats. Established in Columbia, SC.</p>
+                <div class="footer-col footer-logo-col" style="display: none;">
+                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café"
+                        style="height: 80px; width: auto; object-fit: contain; background: transparent;">
                 </div>
-                
+
                 <div class="footer-col">
-                    <h4>Quick Links</h4>
+                    <h4>Location</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="cat-room.html">Cat Room</a></li>
+                        <li>2533 Main St</li>
+                        <li>Columbia, SC 29201</li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul>
-                        <li>2533 Main St</li>
-                        <li>Columbia, SC 29201</li>
                         <li>(803) 708-1562</li>
                         <li><a href="mailto:catdaddyscatcafe@gmail.com">catdaddyscatcafe@gmail.com</a></li>
                     </ul>
@@ -640,19 +744,33 @@
                 <div class="footer-col">
                     <h4>Hours</h4>
                     <ul>
+                        <li>Tue – Sun</li>
+                        <li>11:00 AM – 7:00 PM</li>
                         <li>Monday: Closed</li>
-                        <li>Tue-Sun: 11AM - 7PM</li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                © <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+                <div class="copyright">
+                    © <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+                </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/p/Cat-Daddy-Cat-Cafe-61569842309895/" class="social-icon"
+                        aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/catdaddyscatcafe/?hl=en" class="social-icon"
+                        aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@catdaddyscatcafe" class="social-icon" aria-label="TikTok"
+                        target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script src="js/reveal.js" defer></script>
+    <script src="js/app.js" defer></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -663,7 +781,7 @@
             document.getElementById('modalTrait').textContent = trait;
             document.getElementById('modalDesc').textContent = desc;
             document.getElementById('modalImg').src = imgSrc;
-            
+
             document.getElementById('catModal').classList.add('active');
             document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -676,4 +794,5 @@
         }
     </script>
 </body>
+
 </html>

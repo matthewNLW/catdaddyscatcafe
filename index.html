@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,30 @@
     <!-- Fonts: Playfair Display (Headings) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/reveal.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#F6F1EB">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
 
     <style>
         /* Hero Overrides for Redesign */
         .hero-media {
-            height: 90vh; /* Taller hero */
+            height: 90vh;
+            /* Taller hero */
             margin-bottom: 0;
             position: relative;
             /* Full-hero dark overlay for text readability */
-            background-image: 
-                linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.6) 100%),
+            background-image:
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.6) 100%),
                 url('assets/images/hero_main.jpg');
             background-size: cover;
             background-position: center;
@@ -43,11 +51,11 @@
         .hero-text-floating {
             max-width: 600px;
         }
-        
+
         .hero-text-floating h1 {
             color: #fff;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            line-height: 1;
+            font-size: clamp(2.2rem, 10vw, 4.5rem);
+            line-height: 1.1;
             margin-bottom: var(--space-md);
         }
 
@@ -69,18 +77,44 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-            40% {transform: translateX(-50%) translateY(-10px);}
-            60% {transform: translateX(-50%) translateY(-5px);}
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
         }
 
         @media (max-width: 768px) {
-            .navbar { flex-wrap: wrap; }
-            .nav-links { display: none; } /* Use a menu icon in a real implementation, for now simple stack */
-            .hero-media { height: 80vh; }
+
+            /* Navbar handled by components.css */
+            .hero-media {
+                height: auto;
+                min-height: 70vh;
+                padding: 120px 0 60px;
+            }
+
+            .hero-overlay {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                right: auto;
+                padding: 0 var(--space-md);
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- 1) NAV (Glassmorphism) -->
@@ -89,6 +123,14 @@
             <a href="index.html" class="nav-brand">
                 <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café Logo" class="logo-img">
             </a>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-nav-toggle" id="navToggle" aria-label="Toggle Navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav class="nav-links">
                 <a href="index.html" class="nav-item active">Home</a>
                 <a href="about.html" class="nav-item">About</a>
@@ -100,16 +142,30 @@
         </div>
     </header>
 
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav-overlay" id="navOverlay">
+        <button class="close-nav" id="closeNav" aria-label="Close Menu">&times;</button>
+        <a href="index.html" class="mobile-nav-link active">Home</a>
+        <a href="about.html" class="mobile-nav-link">About</a>
+        <a href="menu.html" class="mobile-nav-link">Menu</a>
+        <a href="events.html" class="mobile-nav-link">Events</a>
+        <a href="cat-room.html" class="mobile-nav-link">Cat Room</a>
+        <a href="#book" class="btn btn-primary" style="margin-top: 24px;">Book a Visit</a>
+    </div>
+
     <!-- 2) HERO -->
     <div class="hero-media">
         <div class="hero-overlay">
             <div class="hero-text-floating">
                 <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Columbia, SC</span>
-                <h1>A sanctuary for coffee & cats.</h1>
-                <p>Experience the perfect blend of specialty coffee and the soothing presence of our rescue residents.</p>
+                <h1>Feels like home. Smells like coffee. Sounds like purring.</h1>
+                <p>Experience the perfect blend of specialty coffee and the soothing presence of our rescue residents.
+                </p>
                 <div class="action-row">
                     <a href="#book" class="btn btn-primary">Book Your Visit</a>
-                    <a href="cat-room.html" class="btn btn-small" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); color: #fff; border: 1px solid rgba(255,255,255,0.3);">Meet the Residents</a>
+                    <a href="cat-room.html" class="btn btn-small"
+                        style="background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); color: #fff; border: 1px solid rgba(255,255,255,0.3);">Meet
+                        the Residents</a>
                 </div>
             </div>
         </div>
@@ -124,11 +180,13 @@
                 <div class="feature-text">
                     <span class="eyebrow">The Cafe</span>
                     <h2>Artisan brews, brewed with heart.</h2>
-                    <p class="text-muted">We take our coffee as seriously as our kittens. Sourced from local roasters, our baristas craft every cup to perfection while you relax in our minimal, sun-lit lounge.</p>
+                    <p class="text-muted"> Our Cat Cafe offers a one of a kind experience where you can enjoy, freshly
+                        brewed coffee, refreshing lemonade, and the company of our friendly cats.</p>
                     <a href="menu.html" class="text-link">Explore the Menu</a>
                 </div>
                 <div>
-                    <img src="assets/images/coffee-studio.png" alt="Specialty Coffee" class="feature-img aspect-landscape" loading="lazy">
+                    <img src="assets/images/coffee-studio.png" alt="Specialty Coffee"
+                        class="feature-img aspect-landscape" loading="lazy">
                 </div>
             </div>
 
@@ -138,12 +196,15 @@
                     <div class="feature-text" style="padding-left: 0;">
                         <span class="eyebrow">The Lounge</span>
                         <h2>More than just a visit.</h2>
-                        <p class="text-muted">Spend your 50-minute session in a low-stress environment designed specifically for feline comfort. Whether you're here to work, read, or cuddle, you're in good company.</p>
+                        <p class="text-muted">Spend your 50-minute session in a low-stress environment designed
+                            specifically for feline comfort. Whether you're here to work, read, or cuddle, you're in
+                            good company.</p>
                         <a href="cat-room.html" class="text-link">Meet our Residents</a>
                     </div>
                 </div>
                 <div style="order: 1;">
-                    <img src="assets/images/lounge.jpg" alt="Cozy Cat Lounge" class="feature-img aspect-landscape" loading="lazy">
+                    <img src="assets/images/lounge.jpg" alt="Cozy Cat Lounge" class="feature-img aspect-landscape"
+                        loading="lazy">
                 </div>
             </div>
         </div>
@@ -156,7 +217,7 @@
                 <span class="eyebrow">On the Menu</span>
                 <h2>Crafted for the conscious guest.</h2>
             </div>
-            
+
             <div class="menu-preview-grid">
                 <div class="menu-pill">
                     <h3>Specialty Coffee</h3>
@@ -181,8 +242,9 @@
                 <div>
                     <span class="eyebrow">Plan Your Stay</span>
                     <h2>Before You Visit</h2>
-                    <p class="text-muted">To ensure a calm atmosphere for our cats, we recommend booking in advance, especially on weekends.</p>
-                    
+                    <p class="text-muted">To ensure a calm atmosphere for our cats, we recommend booking in advance,
+                        especially on weekends.</p>
+
                     <div class="editorial-list" style="margin-top: var(--space-lg);">
                         <div class="list-item">
                             <span class="list-item-title">Admission</span>
@@ -198,13 +260,14 @@
                         </div>
                         <div class="list-item">
                             <span class="list-item-title">Age Policy</span>
-                            <p class="list-item-desc">Ages 7+ welcome. Children must be supervised at all times.</p>
+                            <p class="list-item-desc"Open to all ages with parental supervision.></p>
                         </div>
                     </div>
                 </div>
 
                 <div style="align-self: start;">
-                    <img src="assets/images/merch.png" alt="Cat Daddy Merch" class="feature-img aspect-landscape" loading="lazy">
+                    <img src="assets/images/merch.png" alt="Cat Daddy Merch" class="feature-img aspect-landscape"
+                        loading="lazy">
                 </div>
             </div>
         </div>
@@ -215,8 +278,9 @@
         <div class="wrap text-center reveal reveal--up">
             <div class="cta-block">
                 <span class="hairline-red"></span>
-                <h2>Ready to meet your match?</h2>
-                <p class="text-muted">Book your session now to guarantee your spot in the lounge. We can't wait to see you.</p>
+                <h2>Ready to meet the cats?</h2>
+                <p class="text-muted">Book your session now to guarantee your spot in the lounge. We can't wait to see
+                    you.</p>
                 <a href="tel:8037081562" class="btn btn-primary" style="padding: 18px 48px;">Call to Reserve Now</a>
             </div>
         </div>
@@ -226,31 +290,28 @@
     <footer id="footer">
         <div class="wrap">
             <div class="footer-detailed">
-                <div class="footer-col">
-                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café" style="height: 48px; margin-bottom: var(--space-md); width: auto; object-fit: contain;">
-                    <p style="font-size: 0.9rem;">Where specialty coffee meets the soothing company of rescue cats. Established in Columbia, SC.</p>
-                </div>
-                
-                <div class="footer-col" style="padding-top: var(--space-md);">
-                    <h4>Experience</h4>
-                    <ul>
-                        <li><a href="about.html">Our Story</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="cat-room.html">The Cat Room</a></li>
-                    </ul>
+                <div class="footer-col footer-logo-col" style="display: none;">
+                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café"
+                        style="height: 80px; width: auto; object-fit: contain; background: transparent;">
                 </div>
 
-                <div class="footer-col" style="padding-top: var(--space-md);">
-                    <h4>Find Us</h4>
+                <div class="footer-col">
+                    <h4>Location</h4>
                     <ul>
                         <li>2533 Main St</li>
                         <li>Columbia, SC 29201</li>
-                        <li>(803) 708-1562</li>
                     </ul>
                 </div>
 
-                <div class="footer-col" style="padding-top: var(--space-md);">
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>(803) 708-1562</li>
+                        <li><a href="mailto:catdaddyscatcafe@gmail.com">catdaddyscatcafe@gmail.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
                     <h4>Hours</h4>
                     <ul>
                         <li>Tue – Sun</li>
@@ -258,14 +319,27 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                © <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+                <div class="copyright">
+                    © <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+                </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/p/Cat-Daddy-Cat-Cafe-61569842309895/" class="social-icon"
+                        aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/catdaddyscatcafe/?hl=en" class="social-icon"
+                        aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@catdaddyscatcafe" class="social-icon" aria-label="TikTok"
+                        target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script src="js/reveal.js" defer></script>
+    <script src="js/app.js" defer></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -280,4 +354,5 @@
         });
     </script>
 </body>
+
 </html>

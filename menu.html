@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,42 @@
     <meta name="description" content="Artisan coffee, loose-leaf teas, and fresh pastries.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#F6F1EB">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
     <style>
         @media (max-width: 768px) {
-            .navbar { flex-wrap: wrap; }
-            .nav-brand { margin-bottom: 1rem; }
-            .nav-links { display: flex; width: 100%; justify-content: space-between; overflow-x: auto; padding-bottom: 0.5rem; gap: 1.5rem; }
-            .btn-small { display: none; }
+            /* Navbar handled by components.css */
         }
-        .menu-category { margin-bottom: var(--space-lg); }
-        .menu-item { display: flex; justify-content: space-between; margin-bottom: var(--space-sm); border-bottom: 1px solid var(--color-border); padding-bottom: 6px; }
-        .price { font-weight: 600; color: var(--color-accent); font-family: var(--font-body); }
+
+        .menu-category {
+            margin-bottom: var(--space-lg);
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 6px;
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--color-accent);
+            font-family: var(--font-body);
+        }
     </style>
 </head>
+
 <body>
 
     <!-- NAV -->
@@ -32,6 +52,14 @@
             <a href="index.html" class="nav-brand">
                 <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café Logo" class="logo-img">
             </a>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-nav-toggle" id="navToggle" aria-label="Toggle Navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav class="nav-links">
                 <a href="index.html" class="nav-item">Home</a>
                 <a href="about.html" class="nav-item">About</a>
@@ -43,12 +71,28 @@
         </div>
     </header>
 
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav-overlay" id="navOverlay">
+        <button class="close-nav" id="closeNav" aria-label="Close Menu">&times;</button>
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="about.html" class="mobile-nav-link">About</a>
+        <a href="menu.html" class="mobile-nav-link active">Menu</a>
+        <a href="events.html" class="mobile-nav-link">Events</a>
+        <a href="cat-room.html" class="mobile-nav-link">Cat Room</a>
+        <a href="#book" class="btn btn-primary" style="margin-top: 24px;">Book a Visit</a>
+    </div>
+
     <!-- PAGE HERO -->
-    <section class="section-alt section-narrow-v hero-offset">
-        <div class="wrap content-narrow reveal reveal--fade">
-            <span class="eyebrow">Eat & Drink</span>
-            <h1>Seasonal brews & fresh bites.</h1>
-            <p class="text-muted">Enjoy our selection of locally roasted coffees and house-made treats. Please note that for the safety of our cats, food is only allowed in the designated café area.</p>
+    <section class="hero-media hero-offset"
+        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/menu_hero_placeholder.png'); min-height: 65vh; height: auto; display: flex; align-items: center; background-position: center;">
+        <div class="wrap" style="padding: var(--space-lg) 0;">
+            <div class="hero-text-floating reveal reveal--fade" style="max-width: 600px;">
+                <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Eat & Drink</span>
+                <h1 style="font-size: clamp(2.2rem, 8vw, 3.5rem); line-height: 1.15;">Seasonal brews & fresh bites.</h1>
+                <p style="font-size: 1.1rem; line-height: 1.6;">Enjoy our selection of locally roasted coffees and
+                    house-made treats. Please note that
+                    for the safety of our cats, food is only allowed in the designated café area.</p>
+            </div>
         </div>
     </section>
 
@@ -56,15 +100,19 @@
     <section class="section-narrow-v">
         <div class="wrap">
             <div class="col-2-editorial">
-                
-                <div class="menu-category reveal reveal--up" style="grid-column: 1 / -1; text-align: center; margin-bottom: var(--space-lg);">
+
+                <div class="menu-category reveal reveal--up"
+                    style="grid-column: 1 / -1; text-align: center; margin-bottom: var(--space-lg);">
                     <h2 class="text-center" style="margin-bottom: var(--space-sm);">Our Original Menu</h2>
-                    <img src="assets/images/menu.png" alt="Official Cat Daddy Cat Cafe Menu Board" class="feature-img" style="width: 100%; max-width: 900px; display: block; margin-left: auto; margin-right: auto; aspect-ratio: auto; object-fit: contain; border-radius: var(--radius-lg); margin-bottom: var(--space-lg); box-shadow: 0 20px 50px rgba(0,0,0,0.15);">
-                    
-                    <div style="border-top: 1px solid var(--color-border); padding-top: var(--space-lg); margin-top: var(--space-lg);">
+                    <img src="assets/images/menu.webp" alt="Official Cat Daddy Cat Cafe Menu Board" class="feature-img"
+                        style="width: 100%; max-width: 900px; display: block; margin-left: auto; margin-right: auto; aspect-ratio: auto; object-fit: contain; border-radius: var(--radius-lg); margin-bottom: var(--space-lg); box-shadow: 0 20px 50px rgba(0,0,0,0.15);">
+
+                    <div
+                        style="border-top: 1px solid var(--color-border); padding-top: var(--space-lg); margin-top: var(--space-lg);">
                         <span class="eyebrow">Explore</span>
                         <h2 class="text-center">Menu Selection</h2>
-                        <p class="text-muted" style="max-width: 600px; margin: 0 auto;">Browse our itemized list of coffees, beverages, and sweet treats below.</p>
+                        <p class="text-muted" style="max-width: 600px; margin: 0 auto;">Browse our itemized list of
+                            coffees, beverages, and sweet treats below.</p>
                     </div>
                 </div>
 
@@ -78,11 +126,14 @@
                     <div class="menu-item"><span>Cappuccino</span><span class="price">$6.95</span></div>
                     <div class="menu-item"><span>Americano</span><span class="price">$5.95</span></div>
                     <div class="menu-item"><span>Double-Shot Espresso</span><span class="price">$4.95</span></div>
-                    
-                    <div style="margin-top: var(--space-md); padding: var(--space-sm); background: var(--color-bg-alt); border-radius: var(--radius-md);">
-                        <p style="font-size: 0.85rem; margin-bottom: 4px;"><strong>Syrup Flavors (+$0.50):</strong> Caramel, Vanilla, Hazelnut, Lavender, Mocha</p>
+
+                    <div
+                        style="margin-top: var(--space-md); padding: var(--space-sm); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                        <p style="font-size: 0.85rem; margin-bottom: 4px;"><strong>Syrup Flavors (+$0.50):</strong>
+                            Caramel, Vanilla, Hazelnut, Lavender, Mocha</p>
                         <p style="font-size: 0.85rem; margin-bottom: 4px;"><strong>Extra Shot:</strong> +$0.50</p>
-                        <p style="font-size: 0.85rem; margin-bottom: 0;"><strong>Milk Alternatives (+$0.50):</strong> Oat milk, Almond milk</p>
+                        <p style="font-size: 0.85rem; margin-bottom: 0;"><strong>Milk Alternatives (+$0.50):</strong>
+                            Oat milk, Almond milk</p>
                     </div>
                 </div>
 
@@ -95,10 +146,13 @@
                     <div class="menu-item"><span>Matcha</span><span class="price">$6.95</span></div>
                     <div class="menu-item"><span>Classic Fresh Lemonade</span><span class="price">$7.00</span></div>
                     <div class="menu-item"><span>Bottled Drinks</span><span class="price">$2.95</span></div>
-                    
-                    <div style="margin-top: var(--space-md); padding: var(--space-sm); background: var(--color-bg-alt); border-radius: var(--radius-md);">
-                        <p style="font-size: 0.85rem; margin-bottom: 4px;"><strong>Lemonade Flavors:</strong> Strawberry, Pomegranate, Raspberry, Peach, Lavender</p>
-                        <p style="font-size: 0.85rem; margin-bottom: 0;"><strong>Tea Selections:</strong> Jasmine Green, Earl Grey, White, Cardamom Green, English Black</p>
+
+                    <div
+                        style="margin-top: var(--space-md); padding: var(--space-sm); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                        <p style="font-size: 0.85rem; margin-bottom: 4px;"><strong>Lemonade Flavors:</strong>
+                            Strawberry, Pomegranate, Raspberry, Peach, Lavender</p>
+                        <p style="font-size: 0.85rem; margin-bottom: 0;"><strong>Tea Selections:</strong> Jasmine Green,
+                            Earl Grey, White, Cardamom Green, English Black</p>
                     </div>
                 </div>
 
@@ -113,23 +167,31 @@
                     <div class="menu-item"><span>Milkshake</span><span class="price">$6.95</span></div>
                     <div class="menu-item"><span>Frosted Lemonade</span><span class="price">$7.95</span></div>
 
-                    <div style="margin-top: var(--space-md); padding: var(--space-sm); background: var(--color-bg-alt); border-radius: var(--radius-md);">
-                        <p style="font-size: 0.85rem; margin-bottom: 4px;"><strong>Ice Cream Flavors:</strong> Mint Chip, Butter Pecan, Sherbet, Brownie Salted Caramel, Cookies & Cream</p>
-                        <p style="font-size: 0.85rem; margin-bottom: 0;"><strong>Toppings (+$0.50):</strong> Sprinkles, Heath Bar, Reece's, Oreo</p>
+                    <div
+                        style="margin-top: var(--space-md); padding: var(--space-sm); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+                        <p style="font-size: 0.85rem; margin-bottom: 4px;"><strong>Ice Cream Flavors:</strong> Mint
+                            Chip, Butter Pecan, Sherbet, Brownie Salted Caramel, Cookies & Cream</p>
+                        <p style="font-size: 0.85rem; margin-bottom: 0;"><strong>Toppings (+$0.50):</strong> Sprinkles,
+                            Heath Bar, Reece's, Oreo</p>
                     </div>
                 </div>
 
                 <!-- Admission Policy -->
-                <div class="menu-category reveal reveal--up" style="grid-column: 1 / -1; margin-top: var(--space-lg); border-top: 1px solid var(--color-accent); padding-top: var(--space-md);">
+                <div class="menu-category reveal reveal--up"
+                    style="grid-column: 1 / -1; margin-top: var(--space-lg); border-top: 1px solid var(--color-accent); padding-top: var(--space-md);">
                     <div class="col-2-editorial">
                         <div>
                             <span class="eyebrow">Admission</span>
                             <h2>Visit the Lounge</h2>
-                            <p class="text-muted">Access to our feline sanctuary is separate from café purchases to support the care of our rescue residents.</p>
-                            <div class="menu-item"><span style="font-size: 1.2rem; font-weight: 600;">30 Minute Session</span><span class="price" style="font-size: 1.2rem;">$10.00</span></div>
+                            <p class="text-muted">Access to our feline sanctuary is separate from café purchases to
+                                support the care of our rescue residents.</p>
+                            <div class="menu-item"><span style="font-size: 1.2rem; font-weight: 600;">30 Minute
+                                    Session</span><span class="price" style="font-size: 1.2rem;">$10.00</span></div>
                         </div>
-                        <div style="background: var(--color-bg-surface); padding: var(--space-md); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; text-align: center;">
-                            <p style="font-family: var(--font-heading); font-style: italic; color: var(--color-text-main); margin-bottom: 0;">
+                        <div
+                            style="background: var(--color-bg-surface); padding: var(--space-md); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; text-align: center;">
+                            <p
+                                style="font-family: var(--font-heading); font-style: italic; color: var(--color-text-main); margin-bottom: 0;">
                                 "ONLY Drinks with Lids are permitted in the cat lounge. Food is prohibited."
                             </p>
                         </div>
@@ -144,27 +206,22 @@
     <footer id="footer">
         <div class="wrap">
             <div class="footer-detailed">
-                <div class="footer-col">
-                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café" style="height: 48px; margin-bottom: var(--space-md); width: auto; object-fit: contain;">
-                    <p style="font-size: 0.9rem;">Where specialty coffee meets the soothing company of rescue cats. Established in Columbia, SC.</p>
+                <div class="footer-col footer-logo-col" style="display: none;">
+                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café"
+                        style="height: 80px; width: auto; object-fit: contain; background: transparent;">
                 </div>
-                
+
                 <div class="footer-col">
-                    <h4>Quick Links</h4>
+                    <h4>Location</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="cat-room.html">Cat Room</a></li>
+                        <li>2533 Main St</li>
+                        <li>Columbia, SC 29201</li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul>
-                        <li>2533 Main St</li>
-                        <li>Columbia, SC 29201</li>
                         <li>(803) 708-1562</li>
                         <li><a href="mailto:catdaddyscatcafe@gmail.com">catdaddyscatcafe@gmail.com</a></li>
                     </ul>
@@ -173,18 +230,33 @@
                 <div class="footer-col">
                     <h4>Hours</h4>
                     <ul>
+                        <li>Tue – Sun</li>
+                        <li>11:00 AM – 7:00 PM</li>
                         <li>Monday: Closed</li>
-                        <li>Tue-Sun: 11AM - 7PM</li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                © <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+                <div class="copyright">
+                    © <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+                </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/p/Cat-Daddy-Cat-Cafe-61569842309895/" class="social-icon"
+                        aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/catdaddyscatcafe/?hl=en" class="social-icon"
+                        aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@catdaddyscatcafe" class="social-icon" aria-label="TikTok"
+                        target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                </div>
             </div>
         </div>
     </footer>
     <script src="js/reveal.js" defer></script>
+    <script src="js/app.js" defer></script>
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
+
 </html>

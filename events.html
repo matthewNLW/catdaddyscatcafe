@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,20 @@
     <meta name="description" content="Check our upcoming events including Cat Yoga, Movie Nights, and Adoption Days.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#F6F1EB">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
     <style>
         @media (max-width: 768px) {
-            .navbar { flex-wrap: wrap; }
-            .nav-brand { margin-bottom: 1rem; }
-            .nav-links { display: flex; width: 100%; justify-content: space-between; overflow-x: auto; padding-bottom: 0.5rem; gap: 1.5rem; }
-            .btn-small { display: none; }
+            /* Navbar handled by components.css */
         }
 
         /* View Toggle & Filter UI */
@@ -154,7 +158,7 @@
 
         /* 2. CARD VIEW STYLES */
         .events-card-view {
-            display: none; 
+            display: none;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: var(--space-md);
         }
@@ -184,10 +188,16 @@
         }
 
         /* Utility classes for toggling */
-        .hidden { display: none !important; }
-        .grid-display { display: grid !important; }
+        .hidden {
+            display: none !important;
+        }
+
+        .grid-display {
+            display: grid !important;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- NAV -->
@@ -196,6 +206,14 @@
             <a href="index.html" class="nav-brand">
                 <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café Logo" class="logo-img">
             </a>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-nav-toggle" id="navToggle" aria-label="Toggle Navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <nav class="nav-links">
                 <a href="index.html" class="nav-item">Home</a>
                 <a href="about.html" class="nav-item">About</a>
@@ -207,22 +225,37 @@
         </div>
     </header>
 
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav-overlay" id="navOverlay">
+        <button class="close-nav" id="closeNav" aria-label="Close Menu">&times;</button>
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="about.html" class="mobile-nav-link">About</a>
+        <a href="menu.html" class="mobile-nav-link">Menu</a>
+        <a href="events.html" class="mobile-nav-link active">Events</a>
+        <a href="cat-room.html" class="mobile-nav-link">Cat Room</a>
+        <a href="#book" class="btn btn-primary" style="margin-top: 24px;">Book a Visit</a>
+    </div>
+
     <!-- PAGE HERO -->
-    <section class="section-alt hero-offset">
-        <div class="wrap content-narrow reveal reveal--fade">
-            <span class="eyebrow">Schedule</span>
-            <h1>Upcoming Events</h1>
-            <p class="text-muted">Filter by date and find your perfect time in the lounge. Choose your preferred view for browsing.</p>
+    <section class="hero-media hero-offset"
+        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/about_rainbow.webp'); min-height: 65vh; height: auto; display: flex; align-items: center; background-position: center;">
+        <div class="wrap" style="padding: var(--space-lg) 0;">
+            <div class="hero-text-floating reveal reveal--fade" style="max-width: 600px;">
+                <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Schedule</span>
+                <h1 style="font-size: clamp(2.2rem, 8vw, 3.5rem); line-height: 1.15;">Upcoming Events.</h1>
+                <p style="font-size: 1.1rem; line-height: 1.6;">Filter by date and find your perfect time in the lounge.
+                    Choose your preferred view for browsing.</p>
+            </div>
         </div>
     </section>
 
     <!-- EVENTS SECTION -->
     <section>
         <div class="wrap">
-            
+
             <!-- CONTROLS: VIEW TOGGLE & DATE FILTER -->
             <div class="filter-controls reveal reveal--up">
-                
+
                 <!-- Date Picker Group -->
                 <div class="date-filter-group">
                     <div class="date-input-wrapper">
@@ -245,7 +278,7 @@
 
             <!-- EVENT DATA (To be filtered by JS) -->
             <!-- Note: data-date is YYYY-MM-DD. For recurring Sat, we'll use a distant future date or specific logic -->
-            
+
             <div id="listView" class="events-list-view">
                 <!-- Event 1 (Weekly - Using multiple for example range) -->
                 <div class="event-item list-variant" data-date="2026-01-31">
@@ -316,7 +349,8 @@
                         <div>
                             <span class="event-date-cell">Jan 31 • 9AM</span>
                             <h3>Cat Yoga</h3>
-                            <p class="text-muted" style="font-size: 0.9rem;">A relaxing 50-minute yoga session surrounded by our resident cats.</p>
+                            <p class="text-muted" style="font-size: 0.9rem;">A relaxing 50-minute yoga session
+                                surrounded by our resident cats.</p>
                         </div>
                         <div style="margin-top: 24px;">
                             <span class="price-tag">$20.00</span>
@@ -331,7 +365,8 @@
                         <div>
                             <span class="event-date-cell">Feb 1 • 10AM</span>
                             <h3>Adoption Days</h3>
-                            <p class="text-muted" style="font-size: 0.9rem;">Meet our newest rescues and find your perfect companion.</p>
+                            <p class="text-muted" style="font-size: 0.9rem;">Meet our newest rescues and find your
+                                perfect companion.</p>
                         </div>
                         <div style="margin-top: 24px;">
                             <span class="price-tag">Free</span>
@@ -346,7 +381,8 @@
                         <div>
                             <span class="event-date-cell">Feb 14 • 6PM</span>
                             <h3>Valentine's Date</h3>
-                            <p class="text-muted" style="font-size: 0.9rem;">A romantic evening in the lounge with treats and cats.</p>
+                            <p class="text-muted" style="font-size: 0.9rem;">A romantic evening in the lounge with
+                                treats and cats.</p>
                         </div>
                         <div style="margin-top: 24px;">
                             <span class="price-tag">$25.00</span>
@@ -361,7 +397,8 @@
                         <div>
                             <span class="event-date-cell">Oct 15 • 6PM</span>
                             <h3>Movie Night</h3>
-                            <p class="text-muted" style="font-size: 0.9rem;">Enjoy a cozy film screening with the cats. Popcorn provided.</p>
+                            <p class="text-muted" style="font-size: 0.9rem;">Enjoy a cozy film screening with the cats.
+                                Popcorn provided.</p>
                         </div>
                         <div style="margin-top: 24px;">
                             <span class="price-tag">$18.00</span>
@@ -381,27 +418,22 @@
     <footer id="footer">
         <div class="wrap">
             <div class="footer-detailed">
-                <div class="footer-col">
-                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café" style="height: 48px; margin-bottom: var(--space-md); width: auto; object-fit: contain;">
-                    <p style="font-size: 0.9rem;">Where specialty coffee meets the soothing company of rescue cats. Established in Columbia, SC.</p>
+                <div class="footer-col footer-logo-col" style="display: none;">
+                    <img src="assets/images/logo.png" alt="Cat Daddy’s Cat Café"
+                        style="height: 80px; width: auto; object-fit: contain; background: transparent;">
                 </div>
-                
+
                 <div class="footer-col">
-                    <h4>Quick Links</h4>
+                    <h4>Location</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="cat-room.html">Cat Room</a></li>
+                        <li>2533 Main St</li>
+                        <li>Columbia, SC 29201</li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul>
-                        <li>2533 Main St</li>
-                        <li>Columbia, SC 29201</li>
                         <li>(803) 708-1562</li>
                         <li><a href="mailto:catdaddyscatcafe@gmail.com">catdaddyscatcafe@gmail.com</a></li>
                     </ul>
@@ -410,18 +442,32 @@
                 <div class="footer-col">
                     <h4>Hours</h4>
                     <ul>
+                        <li>Tue – Sun</li>
+                        <li>11:00 AM – 7:00 PM</li>
                         <li>Monday: Closed</li>
-                        <li>Tue-Sun: 11AM - 7PM</li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                &copy; <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+                <div class="copyright">
+                    &copy; <span id="year">2026</span> Cat Daddy Cat Cafe. All rights reserved.
+                </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/p/Cat-Daddy-Cat-Cafe-61569842309895/" class="social-icon"
+                        aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/catdaddyscatcafe/?hl=en" class="social-icon"
+                        aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@catdaddyscatcafe" class="social-icon" aria-label="TikTok"
+                        target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                </div>
             </div>
         </div>
     </footer>
     <script src="js/reveal.js" defer></script>
+    <script src="js/app.js" defer></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -458,11 +504,11 @@
             const start = document.getElementById('startDate').value;
             const end = document.getElementById('endDate').value;
             const noResults = document.getElementById('noResults');
-            
+
             // Get items for the current view
             const selector = currentView === 'list' ? '.list-variant' : '.card-variant';
             const items = document.querySelectorAll(selector);
-            
+
             // Hide items in the other view
             const otherSelector = currentView === 'list' ? '.card-variant' : '.list-variant';
             document.querySelectorAll(otherSelector).forEach(item => item.style.display = 'none');
@@ -497,4 +543,5 @@
         applyFilters();
     </script>
 </body>
+
 </html>

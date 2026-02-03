@@ -1,11 +1,12 @@
 /* Navigation & Glassmorphism */
 /* Navigation & Standard Header */
 header {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.98); /* Permanent White Background */
+  background: rgba(255, 255, 255, 0.98);
+  /* Permanent White Background */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
@@ -23,7 +24,8 @@ header {
 .nav-item {
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--color-text-main); /* Permanent Brand Color */
+  color: var(--color-text-main);
+  /* Permanent Brand Color */
 }
 
 .nav-item:hover,
@@ -35,7 +37,9 @@ header {
   height: 64px;
   width: auto;
   transition: all 0.3s ease;
-  filter: none; /* Keep original colors */
+  filter: none;
+  /* Keep original colors */
+  background: transparent;
 }
 
 .nav-brand {
@@ -44,31 +48,151 @@ header {
   gap: var(--space-xs);
 }
 
-/* Logo styling handled globally above */
-
-/* Logo styling already handled in header block */
-
+/* Desktop Nav Links */
 .nav-links {
-  display: none; /* Hidden on mobile by default */
-  gap: var(--space-lg); /* Increased gap for editorial breathing room */
-  align-items: center;
+  display: none;
 }
 
 @media (min-width: 768px) {
   .nav-links {
     display: flex;
+    gap: var(--space-lg);
+    align-items: center;
   }
 }
 
-.nav-item {
-  font-size: 0.95rem;
-  font-weight: 500;
+/* MOBILE NAV TOGGLE (Hamburger) */
+.mobile-nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 2005;
+  /* Above overlay */
+  padding: 0;
+  margin-right: 12px;
+}
+
+.mobile-nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-main);
+  transition: all 0.3s ease;
+  align-self: flex-end;
+  /* Align right */
+}
+
+.mobile-nav-toggle span:nth-child(2) {
+  width: 18px;
+}
+
+.mobile-nav-toggle span:nth-child(3) {
+  width: 24px;
+}
+
+@media (min-width: 768px) {
+  .mobile-nav-toggle {
+    display: none;
+  }
+}
+
+/* Toggle Animation */
+.mobile-nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* MOBILE NAV OVERLAY */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #F6F1EB;
+  /* Body BG */
+  z-index: 2000;
+  padding: 80px var(--space-md) var(--space-xl);
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mobile-nav-overlay.active {
+  transform: translateX(0);
+}
+
+.close-nav {
+  position: absolute;
+  top: 30px;
+  right: calc(var(--space-md) + 12px);
+  /* Shift inward from edge */
+  background: none;
+  border: none;
+  font-size: 2.5rem;
   color: var(--color-text-main);
+  cursor: pointer;
+  line-height: 1;
+  padding: 10px;
 }
-.nav-item:hover,
-.nav-item.active {
-  color: var(--color-accent); /* Red for active/hover */
+
+.mobile-nav-link {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-text-main);
+  margin: var(--space-sm) 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
 }
+
+.mobile-nav-overlay.active .mobile-nav-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger Animations */
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(2) {
+  transition-delay: 0.15s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(4) {
+  transition-delay: 0.25s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(5) {
+  transition-delay: 0.3s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(6) {
+  transition-delay: 0.35s;
+}
+
 
 /* Buttons */
 .btn {
@@ -76,7 +200,8 @@ header {
   align-items: center;
   justify-content: center;
   padding: 12px 28px;
-  border-radius: var(--radius-sm);  /* Sharp, editorial corner */
+  border-radius: var(--radius-sm);
+  /* Sharp, editorial corner */
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.8rem;
@@ -111,6 +236,7 @@ header {
   padding-bottom: 2px;
   display: inline-block;
 }
+
 .text-link:hover {
   border-bottom-color: var(--color-accent);
   color: var(--color-accent);
@@ -138,8 +264,8 @@ header {
 .hero-text-floating {
   color: #fff;
   /* Option 3: Layered shadows for ultra-high legibility on photos */
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.45), 
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.45),
     0 10px 40px rgba(0, 0, 0, 0.35);
 }
 
@@ -162,6 +288,7 @@ header {
   border-bottom: 1px solid var(--color-border);
   padding: var(--space-md) 0;
 }
+
 .list-item:first-child {
   padding-top: 0;
 }
@@ -185,9 +312,11 @@ header {
 .visit-block {
   margin-top: var(--space-md);
 }
+
 .visit-detail {
   margin-bottom: var(--space-md);
 }
+
 .visit-detail strong {
   display: block;
   font-family: var(--font-heading);
@@ -195,6 +324,7 @@ header {
   color: var(--color-text-main);
   margin-bottom: 6px;
 }
+
 .visit-detail span {
   color: var(--color-text-muted);
   font-size: 0.95rem;
@@ -207,19 +337,23 @@ header {
   margin-bottom: 1.25rem;
   color: var(--color-text-main);
 }
+
 .footer-col ul li {
   margin-bottom: 0.75rem;
   font-size: 0.9rem;
   color: var(--color-text-muted);
 }
+
 .footer-col ul li a:hover {
   color: var(--color-accent);
 }
 
 .hairline-red {
   display: block;
-  width: 40px; /* Slightly narrower for elegance */
-  height: 2px; /* Thinner line for editorial feel */
+  width: 40px;
+  /* Slightly narrower for elegance */
+  height: 2px;
+  /* Thinner line for editorial feel */
   background-color: var(--color-accent);
   margin: 0 auto var(--space-sm) auto;
 }
@@ -309,4 +443,3 @@ header {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(138, 0, 0, 0.05);
 }
-
