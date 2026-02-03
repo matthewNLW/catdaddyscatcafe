@@ -42,8 +42,8 @@
         .hero-overlay {
             position: absolute;
             bottom: var(--space-xl);
-            left: var(--space-md);
-            right: var(--space-md);
+            left: var(--space-lg);
+            right: var(--space-lg);
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -54,46 +54,17 @@
 
         .hero-text-floating h1 {
             color: #fff;
-            font-size: clamp(2.2rem, 10vw, 4.5rem);
-            line-height: 1.1;
-            margin-bottom: var(--space-md);
+            font-size: clamp(1.8rem, 9vw, 4.8rem);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-lg);
         }
 
         .hero-text-floating p {
             font-size: 1.2rem;
         }
 
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #fff;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            opacity: 0.6;
-            animation: bounce 2s infinite;
-        }
 
-        @keyframes bounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateX(-50%) translateY(0);
-            }
-
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
 
         @media (max-width: 768px) {
 
@@ -137,7 +108,7 @@
                 <a href="menu.html" class="nav-item">Menu</a>
                 <a href="events.html" class="nav-item">Events</a>
                 <a href="cat-room.html" class="nav-item">Cat Room</a>
-                <a href="#book" class="btn btn-primary btn-small">Book a Visit</a>
+                <a href="tel:8037081562" class="btn btn-primary btn-small">Call to Book</a>
             </nav>
         </div>
     </header>
@@ -150,7 +121,7 @@
         <a href="menu.html" class="mobile-nav-link">Menu</a>
         <a href="events.html" class="mobile-nav-link">Events</a>
         <a href="cat-room.html" class="mobile-nav-link">Cat Room</a>
-        <a href="#book" class="btn btn-primary" style="margin-top: 24px;">Book a Visit</a>
+        <a href="tel:8037081562" class="btn btn-primary" style="margin-top: 24px;">Call to Book</a>
     </div>
 
     <!-- 2) HERO -->
@@ -158,18 +129,18 @@
         <div class="hero-overlay">
             <div class="hero-text-floating">
                 <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Columbia, SC</span>
-                <h1>Feels like home. Smells like coffee. Sounds like purring.</h1>
+                <h1>Feels like home.<br>Smells like coffee.<br>Sounds like purrs.</h1>
                 <p>Experience the perfect blend of specialty coffee and the soothing presence of our rescue residents.
                 </p>
                 <div class="action-row">
-                    <a href="#book" class="btn btn-primary">Book Your Visit</a>
+                    <a href="tel:8037081562" class="btn btn-primary">Book Your Visit</a>
                     <a href="cat-room.html" class="btn btn-small"
                         style="background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); color: #fff; border: 1px solid rgba(255,255,255,0.3);">Meet
                         the Residents</a>
                 </div>
             </div>
         </div>
-        <div class="scroll-down">Scroll</div>
+
     </div>
 
     <!-- 3) THE EXPERIENCE (Z-Pattern Features) -->
@@ -196,7 +167,7 @@
                     <div class="feature-text" style="padding-left: 0;">
                         <span class="eyebrow">The Lounge</span>
                         <h2>More than just a visit.</h2>
-                        <p class="text-muted">Spend your 50-minute session in a low-stress environment designed
+                        <p class="text-muted">Spend your time in a low-stress environment designed
                             specifically for feline comfort. Whether you're here to work, read, or cuddle, you're in
                             good company.</p>
                         <a href="cat-room.html" class="text-link">Meet our Residents</a>
@@ -258,10 +229,7 @@
                             <span class="list-item-title">Socks Required</span>
                             <p class="list-item-desc">Please bring a pair or purchase custom cat-socks at the desk.</p>
                         </div>
-                        <div class="list-item">
-                            <span class="list-item-title">Age Policy</span>
-                            <p class="list-item-desc"Open to all ages with parental supervision.></p>
-                        </div>
+
                     </div>
                 </div>
 
@@ -306,7 +274,7 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul>
-                        <li>(803) 708-1562</li>
+                        <li><a href="tel:8037081562">(803) 708-1562</a></li>
                         <li><a href="mailto:catdaddyscatcafe@gmail.com">catdaddyscatcafe@gmail.com</a></li>
                     </ul>
                 </div>

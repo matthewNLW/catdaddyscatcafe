@@ -220,7 +220,7 @@
                 <a href="menu.html" class="nav-item">Menu</a>
                 <a href="events.html" class="nav-item active">Events</a>
                 <a href="cat-room.html" class="nav-item">Cat Room</a>
-                <a href="#book" class="btn btn-primary btn-small">Book a Visit</a>
+                <a href="tel:8037081562" class="btn btn-primary btn-small">Call to Book</a>
             </nav>
         </div>
     </header>
@@ -233,16 +233,16 @@
         <a href="menu.html" class="mobile-nav-link">Menu</a>
         <a href="events.html" class="mobile-nav-link active">Events</a>
         <a href="cat-room.html" class="mobile-nav-link">Cat Room</a>
-        <a href="#book" class="btn btn-primary" style="margin-top: 24px;">Book a Visit</a>
+        <a href="tel:8037081562" class="btn btn-primary" style="margin-top: 24px;">Call to Book</a>
     </div>
 
     <!-- PAGE HERO -->
-    <section class="hero-media hero-offset"
-        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/about_rainbow.webp'); min-height: 65vh; height: auto; display: flex; align-items: center; background-position: center;">
-        <div class="wrap" style="padding: var(--space-lg) 0;">
-            <div class="hero-text-floating reveal reveal--fade" style="max-width: 600px;">
-                <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Schedule</span>
-                <h1 style="font-size: clamp(2.2rem, 8vw, 3.5rem); line-height: 1.15;">Upcoming Events.</h1>
+    <section class="hero-media hero-page hero-offset"
+        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/about_rainbow.webp'); background-position: center;">
+        <div class="wrap">
+            <div class="hero-text-floating reveal reveal--fade">
+                <span class="eyebrow">Schedule</span>
+                <h1>Yoga sessions.<br>Movie nights.<br>Adoption days.</h1>
                 <p style="font-size: 1.1rem; line-height: 1.6;">Filter by date and find your perfect time in the lounge.
                     Choose your preferred view for browsing.</p>
             </div>
@@ -280,136 +280,16 @@
             <!-- Note: data-date is YYYY-MM-DD. For recurring Sat, we'll use a distant future date or specific logic -->
 
             <div id="listView" class="events-list-view">
-                <!-- Event 1 (Weekly - Using multiple for example range) -->
-                <div class="event-item list-variant" data-date="2026-01-31">
-                    <div class="event-row">
-                        <div class="event-date-cell">Jan 31<br>9:00 AM</div>
-                        <div class="event-info-cell">
-                            <h3>Cat Yoga (Mew-ga)</h3>
-                            <p>A relaxing 50-minute yoga session surrounded by our resident cats.</p>
-                        </div>
-                        <div class="event-action-cell">
-                            <span class="price-tag">$20.00</span>
-                            <a href="tel:8037081562" class="btn btn-primary btn-small">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Event 2 (Feb 1) -->
-                <div class="event-item list-variant" data-date="2026-02-01">
-                    <div class="event-row">
-                        <div class="event-date-cell">Feb 1<br>10:00 AM</div>
-                        <div class="event-info-cell">
-                            <h3>Adoption Days</h3>
-                            <p>Meet our newest rescues and find your forever companion.</p>
-                        </div>
-                        <div class="event-action-cell">
-                            <span class="price-tag">Free Entry</span>
-                            <a href="cat-room.html" class="btn btn-primary btn-small">View Cats</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Event 3 (Feb 14) -->
-                <div class="event-item list-variant" data-date="2026-02-14">
-                    <div class="event-row">
-                        <div class="event-date-cell">Feb 14<br>6:00 PM</div>
-                        <div class="event-info-cell">
-                            <h3>Valentine’s Date Night</h3>
-                            <p>A romantic evening in the lounge with sweet treats and feline friends.</p>
-                        </div>
-                        <div class="event-action-cell">
-                            <span class="price-tag">$25.00</span>
-                            <a href="tel:8037081562" class="btn btn-primary btn-small">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Event 4 (Oct 15) -->
-                <div class="event-item list-variant" data-date="2026-10-15">
-                    <div class="event-row">
-                        <div class="event-date-cell">Oct 15<br>6:00 PM</div>
-                        <div class="event-info-cell">
-                            <h3>Movie Night</h3>
-                            <p>Enjoy a cozy film screening in the cat room with popcorn included.</p>
-                        </div>
-                        <div class="event-action-cell">
-                            <span class="price-tag">$18.00</span>
-                            <a href="tel:8037081562" class="btn btn-primary btn-small">Book Now</a>
-                        </div>
-                    </div>
-                </div>
+                <!-- No upcoming events at this time -->
             </div>
 
             <!-- CARD VIEW DATA -->
             <div id="cardView" class="events-card-view">
-                <!-- Card 1 -->
-                <div class="event-item card-variant" data-date="2026-01-31">
-                    <div class="event-card">
-                        <div>
-                            <span class="event-date-cell">Jan 31 • 9AM</span>
-                            <h3>Cat Yoga</h3>
-                            <p class="text-muted" style="font-size: 0.9rem;">A relaxing 50-minute yoga session
-                                surrounded by our resident cats.</p>
-                        </div>
-                        <div style="margin-top: 24px;">
-                            <span class="price-tag">$20.00</span>
-                            <a href="tel:8037081562" class="btn btn-primary btn-small" style="width: 100%;">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="event-item card-variant" data-date="2026-02-01">
-                    <div class="event-card">
-                        <div>
-                            <span class="event-date-cell">Feb 1 • 10AM</span>
-                            <h3>Adoption Days</h3>
-                            <p class="text-muted" style="font-size: 0.9rem;">Meet our newest rescues and find your
-                                perfect companion.</p>
-                        </div>
-                        <div style="margin-top: 24px;">
-                            <span class="price-tag">Free</span>
-                            <a href="cat-room.html" class="btn btn-primary btn-small" style="width: 100%;">Meet Cats</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="event-item card-variant" data-date="2026-02-14">
-                    <div class="event-card">
-                        <div>
-                            <span class="event-date-cell">Feb 14 • 6PM</span>
-                            <h3>Valentine's Date</h3>
-                            <p class="text-muted" style="font-size: 0.9rem;">A romantic evening in the lounge with
-                                treats and cats.</p>
-                        </div>
-                        <div style="margin-top: 24px;">
-                            <span class="price-tag">$25.00</span>
-                            <a href="tel:8037081562" class="btn btn-primary btn-small" style="width: 100%;">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="event-item card-variant" data-date="2026-10-15">
-                    <div class="event-card">
-                        <div>
-                            <span class="event-date-cell">Oct 15 • 6PM</span>
-                            <h3>Movie Night</h3>
-                            <p class="text-muted" style="font-size: 0.9rem;">Enjoy a cozy film screening with the cats.
-                                Popcorn provided.</p>
-                        </div>
-                        <div style="margin-top: 24px;">
-                            <span class="price-tag">$18.00</span>
-                            <a href="tel:8037081562" class="btn btn-primary btn-small" style="width: 100%;">Book Now</a>
-                        </div>
-                    </div>
-                </div>
+                <!-- No upcoming events at this time -->
             </div>
 
             <!-- No results message -->
-            <div id="noResults">No events found for the selected date range.</div>
+            <div id="noResults">No upcoming events scheduled at this time. Please check back later!</div>
 
         </div>
     </section>
@@ -434,7 +314,7 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul>
-                        <li>(803) 708-1562</li>
+                        <li><a href="tel:8037081562">(803) 708-1562</a></li>
                         <li><a href="mailto:catdaddyscatcafe@gmail.com">catdaddyscatcafe@gmail.com</a></li>
                     </ul>
                 </div>

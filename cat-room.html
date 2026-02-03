@@ -29,8 +29,8 @@
         .cat-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: var(--space-xl);
-            padding: var(--space-xl) 0;
+            gap: var(--space-lg);
+            padding: var(--space-lg) 0;
         }
 
         @media (min-width: 768px) {
@@ -141,6 +141,35 @@
             margin-top: 12px;
         }
 
+        /* Mobile Tap Indicator */
+        .cat-img-wrapper::after {
+            content: 'Tap for details';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--color-accent);
+            padding: 6px 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .cat-img-wrapper::after {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         /* Hover Interaction Model */
         .cat-card:hover .cat-name::after {
             width: 60px;
@@ -161,11 +190,21 @@
             transform: scale(1);
         }
 
+        .cat-card:hover .cat-img-wrapper::after {
+            opacity: 0;
+        }
+
         /* FAQ Styles */
         .faq-section {
-            padding: var(--space-xxl) 0;
+            padding: var(--space-xl) 0;
             background-color: #fafafa;
             border-top: 1px solid #eee;
+        }
+
+        @media (min-width: 768px) {
+            .faq-section {
+                padding: var(--space-xxl) 0;
+            }
         }
 
         .faq-container {
@@ -251,24 +290,34 @@
         /* Modal / Slide-up Panel Styles */
         .cat-modal {
             position: fixed;
-            bottom: -100%;
+            top: 100%;
             left: 0;
             width: 100%;
-            height: 85vh;
+            height: 100vh;
             background: white;
             z-index: 2000;
-            transition: bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            border-radius: 24px 24px 0 0;
-            box-shadow: 0 -30px 90px rgba(0, 0, 0, 0.15);
-            padding: var(--space-xl);
+            transition: top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
         }
 
         .cat-modal.active {
-            bottom: 0;
+            top: 0;
         }
+
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: flex-end;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+
 
         .modal-overlay {
             position: fixed;
@@ -290,30 +339,40 @@
         }
 
         .modal-close {
-            align-self: flex-end;
             background: none;
             border: none;
-            font-size: 2rem;
+            font-size: 2.5rem;
             cursor: pointer;
-            padding: 10px;
             line-height: 1;
+            padding: 5px;
+            color: var(--color-text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--color-accent);
+        }
+
+        .modal-body {
+            padding: var(--space-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .modal-content-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: var(--space-xl);
+            gap: var(--space-md);
         }
 
         @media (min-width: 1024px) {
-            .cat-modal {
-                height: 70vh;
-                padding: var(--space-xxl);
-            }
-
             .modal-content-grid {
                 grid-template-columns: 1fr 1.2fr;
                 gap: var(--space-xxl);
+                align-items: start;
             }
         }
     </style>
@@ -342,7 +401,7 @@
                 <a href="menu.html" class="nav-item">Menu</a>
                 <a href="events.html" class="nav-item">Events</a>
                 <a href="cat-room.html" class="nav-item active">Cat Room</a>
-                <a href="#book" class="btn btn-primary btn-small">Book a Visit</a>
+                <a href="tel:8037081562" class="btn btn-primary btn-small">Call to Book</a>
             </nav>
         </div>
     </header>
@@ -355,16 +414,16 @@
         <a href="menu.html" class="mobile-nav-link">Menu</a>
         <a href="events.html" class="mobile-nav-link">Events</a>
         <a href="cat-room.html" class="mobile-nav-link active">Cat Room</a>
-        <a href="#book" class="btn btn-primary" style="margin-top: 24px;">Book a Visit</a>
+        <a href="tel:8037081562" class="btn btn-primary" style="margin-top: 24px;">Call to Book</a>
     </div>
 
     <!-- PAGE HERO -->
-    <section class="hero-media hero-offset"
-        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/cat_room.jpg'); min-height: 65vh; height: auto; display: flex; align-items: center;">
-        <div class="wrap" style="padding: var(--space-lg) 0;">
-            <div class="hero-text-floating" style="max-width: 600px;">
-                <span class="eyebrow" style="color: rgba(255,255,255,0.8);">The Lounge</span>
-                <h1 style="font-size: clamp(2.2rem, 8vw, 3.5rem); line-height: 1.15;">Meet the Residents.</h1>
+    <section class="hero-media hero-page hero-offset"
+        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/cat_room.jpg');">
+        <div class="wrap">
+            <div class="hero-text-floating">
+                <span class="eyebrow">The Lounge</span>
+                <h1>Soft paws.<br>Wild hearts.<br>Gentle souls.</h1>
                 <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.6;">Our cat room is home to 12-15
                     rescue cats at any
                     given time. Explore our peaceful sanctuary.</p>
@@ -660,16 +719,17 @@
                 <details class="faq-item">
                     <summary>Do we adopt out our cats?</summary>
                     <div class="faq-answer">
-                        No, our cafe cats are residents here at Cat Daddy Cat Cafe. Unlike some other cat cafes in the
-                        U.S. But no worries! We will host adoption days for you to come and find your new furry friend!
+                        No, our cafe cats are permanent residents. However, we host regular adoption days with local
+                        shelters—check our events page for the next scheduled date!
                     </div>
                 </details>
 
                 <details class="faq-item">
                     <summary>When will we have adoption days?</summary>
                     <div class="faq-answer">
-                        Once or twice a month we will host adoption days. Keep an eye out on our social media for all
-                        updates regarding adoption days!
+                        We host adoption days periodically. Please check our <a href="events.html"
+                            style="color: var(--color-accent); font-weight: 600;">Events page</a> for upcoming dates and
+                        more information!
                     </div>
                 </details>
 
@@ -694,24 +754,28 @@
     <!-- CAT MODAL -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeCatModal()"></div>
     <div class="cat-modal" id="catModal">
-        <button class="modal-close" onclick="closeCatModal()">×</button>
-        <div class="modal-content-grid">
-            <img id="modalImg" src="" alt=""
-                style="width: 100%; border-radius: 8px; aspect-ratio: 4/5; object-fit: cover;">
-            <div>
-                <span id="modalBreed" class="eyebrow" style="color: var(--color-accent);">Breed</span>
-                <h2 id="modalName" style="margin-bottom: var(--space-xs);">Cat Name</h2>
-                <span id="modalTrait"
-                    style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; display: block; margin-bottom: var(--space-md);">Trait</span>
-                <p id="modalDesc" class="text-muted" style="font-size: 1.1rem; line-height: 1.6;">Full description goes
-                    here.</p>
-                <div style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid #eee;">
-                    <span
-                        style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #999; display: block; margin-bottom: 4px;">Status</span>
-                    <span style="font-weight: 600; color: var(--color-accent);">Permanent Resident</span>
+        <div class="modal-header">
+            <button class="modal-close" onclick="closeCatModal()">×</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-content-grid">
+                <img id="modalImg" src="" alt=""
+                    style="width: 100%; border-radius: 8px; aspect-ratio: 4/5; object-fit: cover;">
+                <div>
+                    <span id="modalBreed" class="eyebrow" style="color: var(--color-accent);">Breed</span>
+                    <h2 id="modalName" style="margin-bottom: var(--space-xs);">Cat Name</h2>
+                    <span id="modalTrait"
+                        style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; display: block; margin-bottom: var(--space-md);">Trait</span>
+                    <p id="modalDesc" class="text-muted" style="font-size: 1.1rem; line-height: 1.6;">Full description
+                        goes here.</p>
+                    <div style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid #eee;">
+                        <span
+                            style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #999; display: block; margin-bottom: 4px;">Status</span>
+                        <span style="font-weight: 600; color: var(--color-accent);">Permanent Resident</span>
+                    </div>
+                    <a href="tel:8037081562" class="btn btn-primary" style="margin-top: var(--space-lg);"
+                        onclick="closeCatModal()">Call to Book a Visit</a>
                 </div>
-                <a href="#book" class="btn btn-primary" style="margin-top: var(--space-lg);"
-                    onclick="closeCatModal()">Book a Visit to Meet Them</a>
             </div>
         </div>
     </div>
@@ -736,7 +800,7 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul>
-                        <li>(803) 708-1562</li>
+                        <li><a href="tel:8037081562">(803) 708-1562</a></li>
                         <li><a href="mailto:catdaddyscatcafe@gmail.com">catdaddyscatcafe@gmail.com</a></li>
                     </ul>
                 </div>
