@@ -23,6 +23,7 @@ html.js-enabled .reveal {
         opacity var(--reveal-duration) var(--reveal-ease),
         transform var(--reveal-duration) var(--reveal-ease);
     transition-delay: var(--d, 0ms);
+    will-change: transform, opacity;
 }
 
 /* Visible state - gentle float into place */
